@@ -1,0 +1,1 @@
+export const termsConditionBgImage = require("../assets/contact.png");

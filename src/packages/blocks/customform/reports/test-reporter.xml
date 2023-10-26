@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/customform/__tests__/step-definitions/CustomForm.web.steps.tsx">
+        <testCase name="CustomForm User navigates to CustomForm" duration="3258"/>
+    </file>
+</testExecutions>

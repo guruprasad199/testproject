@@ -1,0 +1,81 @@
+@import url('https://use.typekit.net/your-font-kit-id.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&family=Noto+Sans:wght@200&family=Nunito:ital,wght@0,300;0,400;1,300&family=PT+Sans&family=Qwitcher+Grypen&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Noto+Sans+JP:wght@300&family=Noto+Sans:wght@200&family=Nunito:ital,wght@0,300;0,400;1,300&family=PT+Sans&family=Qwitcher+Grypen&family=Roboto:wght@100&display=swap');
+@import url("../src/fonts/stylesheets.css");
+@import url('https://fonts.googleapis.com/css2?family=Rokkitt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("../../blocks/landingpage/src/KillerCarousel.web.css");
+@import url("../../blocks/landingpage/src/KillerCard.web.css");
+@import url("../../components/src/MainHeader/Header.web.css");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;700&display=swap');
+
+:root {
+  --color-primary: #3f7a4f;
+  --color-black: #1c213a;
+  --color-dark-grey: #7c8188;
+  --color-white: #ffffff;
+  --color-blue: #527bbe;
+  --color-orange: #f67054;
+  --color-sky-blue: #007bff;
+  --color-green: #038b57;
+  --color-red: #ff471a;
+  --color-gray: #7c8188;
+  --color-gold-yellow: #ffa500;
+  --color-light-gray: #f2f6f8;
+  --color-light-gray-hover: #7c81884f;
+  --color-individual: #88ae47;
+  --color-individual-firstsquareT: #7f9065;
+  --color-individual-secondsquareT: #96aeb4;
+  --color-individual-firstsquare: #e8f0db;
+  --color-individual-secondsquare: #e1f4fa;
+  --color-individual-white: #f4f8ea;
+  --color-individual-gray: #cbcbcb;
+  --color-individual-gray1: #c3c3c3;
+  --color-green-individual-main: #88ae47;
+  --color-green-individual-backgroud: #f8f6f7;
+  --color-tabgreen-individual-backgroud: #bae481;
+  --color-individual-Inner-box: #e6f1cf;
+  --color-individual-i-b-amount: #a4b0b2;
+  --color-individual-i-b-amount1: #94bcbf;
+}
+*{
+  font-family: 'Montserrat';
+  height:"100%"
+}
+body {
+  padding-right: 0 !important;
+  user-select: none;
+}
+iframe {
+  pointer-events: none !important;
+}
+li {
+  list-style: none;
+}
+.modal-content {
+  border-radius: 10px;
+}
+@media (min-width: 768px) {
+  .cm-small-modal-6 {
+    max-width: 600px;
+  }
+}
+
+
+@media (max-width: 767.92px) {
+  .cm-small-modal-6 {
+    max-width: 335px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.ant-input {
+  border-radius: 10px !important;
+}
+
+input{
+  color: "#64748B";
+  /* Change the placeholder text color */
+  font-size: 16px; 
+  font-weight: 400;
+  font-Family: "Montserrate", "sans-serif" !important;
+}

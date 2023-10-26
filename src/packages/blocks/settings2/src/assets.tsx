@@ -1,0 +1,16 @@
+export const imgPasswordVisible = require("../assets/ic_password_visible.png");
+export const imgPasswordInVisible = require("../assets/ic_password_invisible.png");
+export const activityBanner = require("../assets/bannerActivity.png")
+export const treeTop = require("../assets/treeTop.png")
+export const archery = require("../assets/archery.png")
+export const boating = require("../assets/boating.png")
+export const bodyZorbing = require("../assets/bodyZorbing.png")
+export const bowling = require("../assets/bowling.png")
+export const bullRide = require("../assets/bullRide.png")
+export const jungleHouse = require("../assets/jungleHouse.png")
+export const kidsFunZone = require("../assets/kidsFunZone.png")
+export const laserTag = require("../assets/laserTag.png")
+export const rainDance = require("../assets/rainDance.png")
+export const trampolingPark = require("../assets/trampolingPark.png")
+export const zipCycle = require("../assets/zipCycle.png")
+export const zipLine = require("../assets/zipline.png")

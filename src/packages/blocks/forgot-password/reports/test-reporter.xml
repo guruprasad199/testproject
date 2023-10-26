@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/forgot-password/__tests__/step-definitions/ForgotPasswordOTP-scenario.steps.tsx">
+        <testCase name="ForgotPasswordOTP User navigates to ForgotPasswordOTP" duration="1911"/>
+        <testCase name="ForgotPasswordOTP User navigates to ForgotPasswordOTP in web" duration="373"/>
+    </file>
+    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/forgot-password/__tests__/step-definitions/NewPassword-scenario.steps.tsx">
+        <testCase name="NewPassword User navigates to NewPassword" duration="1809"/>
+    </file>
+    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/forgot-password/__tests__/step-definitions/ForgotPassword-scenario.steps.tsx">
+        <testCase name="ForgotPassword User navigates to ForgotPassword" duration="1195"/>
+        <testCase name="ForgotPassword User navigates to ForgotPassword with email id" duration="417"/>
+    </file>
+    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/forgot-password/__tests__/step-definitions/ForgotPassword-scenario.web.steps.tsx">
+        <testCase name="ForgotPasswordWeb User navigates to Email ForgotPasswordWeb" duration="163"/>
+    </file>
+</testExecutions>

@@ -1,0 +1,1 @@
+export const FaqBg = require("../assets/Faq.png");

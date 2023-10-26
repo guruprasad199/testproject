@@ -1,0 +1,55 @@
+.react-tel-input .form-control {
+  width: 100% !important;
+  height: 55px !important;
+  color: #64748b !important;
+}
+
+.textfield > .MuiOutlinedInput-root {
+  border-radius: 8px;
+  height: 56px !important;
+  padding-bottom: 4px;
+}
+.MuiTypography-body1 {
+  font-family: "Montserrat", sans-serif !important ;
+  color: #64748b;
+}
+
+.error-message {
+  color: "red";
+}
+
+.success-message {
+  color: "green";
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40%;
+  background: #fff;
+  width: 60px;
+}
+
+.lineHorizontal {
+  border-top: 1px solid #e2e8f0;
+}
+
+.Mui-checked svg:nth-child(2) {
+  transform: scale(2) !important;
+  width: "100px";
+}
+
+.radioButtons .MuiSvgIcon-root {
+  width: 12px !important;
+  height: 12px !important;
+}
+.rightCardImg {
+  width: 100%;
+}
+
+@media (max-width: 1600px) {
+  .rightCardImg {
+    height: 120rem;
+  }
+}

@@ -1,0 +1,10 @@
+export const contact = require("./assets/contact.png");
+export const location = require("./assets/Location.png")
+export const logo = require("./assets/Logo.png")
+export const logoFooter = require("./assets/LogoFooter.png")
+export const DelhiLogo = require("./assets/Delhi.png")
+export const DelhiToursim = require("./assets/DelhiTourism.png");
+export const facebook = require("./assets/Facebook.png")
+export const Twitter = require("./assets/Twitter.png")
+export const Insta  = require("./assets/Instagram.png")
+export const LinkedIn = require("./assets/LinkedIn.png")

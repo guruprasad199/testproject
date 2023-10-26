@@ -1,0 +1,83 @@
+.headerMainContainer {
+  height: 436px;
+  width: 100%;
+  position: relative;
+}
+.headerImage {
+  height: 100%;
+  width: 100%;
+}
+.headerText {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 5px 0;
+  font-family: "Liberteen Regular", sans-serif;
+  color: white;
+}
+.headerInfo {
+  font-size: 18px;
+  margin: 10px;
+  font-weight: 500;
+  font-family: "Montserrate", sans-serif;
+  width: 674px;
+  text-align: center;
+}
+.orangeText {
+  color: #ffde59;
+  font-weight: 700;
+  margin: 5px 0;
+  font-size: 32px;
+  font-family: "Liberteen Medium", sans-serif;
+}
+.headerTextContainer {
+  padding: 10px 10px;
+  position: absolute;
+  background-color: rgba(39, 80, 174, 0.7);
+  left: 50%;
+  top: 50%;
+  bottom: 0px;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+@media (max-width: 576px) {
+  .headerText {
+    font-size: 30px;
+  }
+  .headerInfo {
+    width: 80%;
+    font-size: 18px;
+    margin: 10px;
+  }
+}
+@media (max-width: 475px) {
+  .headerText {
+    font-size: 20px;
+  }
+  .headerInfo {
+    font-size: 16px;
+    margin: 5px;
+  }
+}
+@media (max-width: 375px) {
+  .headerText {
+    margin: 5px;
+  }
+  .headerInfo {
+    font-size: 12px;
+    margin: 0px;
+  }
+}
+
+@media (max-width: 800px) {
+  .headerInfo {
+    width: 60%;
+  }
+}

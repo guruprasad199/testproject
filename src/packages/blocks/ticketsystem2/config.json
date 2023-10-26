@@ -1,0 +1,65 @@
+{
+  "id": "ticketsystem2",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/ticketsystem2",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Ticketsystem2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Ticketsystem2": {
+        "file": "Ticketsystem2.tsx",
+        "extends": "Ticketsystem2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Ticketsystem2Controller",
+            "path": "./Ticketsystem2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Ticketsystem2Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Ticketsystem2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Ticketsystem2": {
+        "file": "Ticketsystem2.web.tsx",
+        "extends": "Ticketsystem2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Ticketsystem2Controller",
+            "path": "./Ticketsystem2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Ticketsystem2Controller"
+          }
+        ]
+      }
+    }
+  }
+}

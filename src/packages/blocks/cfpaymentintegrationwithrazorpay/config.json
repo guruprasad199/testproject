@@ -1,0 +1,65 @@
+{
+  "id": "cfpaymentintegrationwithrazorpay",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/cfpaymentintegrationwithrazorpay",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Cfpaymentintegrationwithrazorpay"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Cfpaymentintegrationwithrazorpay": {
+        "file": "Cfpaymentintegrationwithrazorpay.tsx",
+        "extends": "CfpaymentintegrationwithrazorpayController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "CfpaymentintegrationwithrazorpayController",
+            "path": "./CfpaymentintegrationwithrazorpayController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./CfpaymentintegrationwithrazorpayController"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Cfpaymentintegrationwithrazorpay"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Cfpaymentintegrationwithrazorpay": {
+        "file": "Cfpaymentintegrationwithrazorpay.web.tsx",
+        "extends": "CfpaymentintegrationwithrazorpayController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "CfpaymentintegrationwithrazorpayController",
+            "path": "./CfpaymentintegrationwithrazorpayController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./CfpaymentintegrationwithrazorpayController"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "searchengineoptimisationseo2",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/searchengineoptimisationseo2",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Searchengineoptimisationseo2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Searchengineoptimisationseo2": {
+        "file": "Searchengineoptimisationseo2.tsx",
+        "extends": "Searchengineoptimisationseo2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Searchengineoptimisationseo2Controller",
+            "path": "./Searchengineoptimisationseo2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Searchengineoptimisationseo2Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Searchengineoptimisationseo2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Searchengineoptimisationseo2": {
+        "file": "Searchengineoptimisationseo2.web.tsx",
+        "extends": "Searchengineoptimisationseo2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Searchengineoptimisationseo2Controller",
+            "path": "./Searchengineoptimisationseo2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Searchengineoptimisationseo2Controller"
+          }
+        ]
+      }
+    }
+  }
+}

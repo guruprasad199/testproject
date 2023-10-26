@@ -1,0 +1,65 @@
+{
+  "id": "audittrail2",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/audittrail2",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Audittrail2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Audittrail2": {
+        "file": "Audittrail2.tsx",
+        "extends": "Audittrail2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Audittrail2Controller",
+            "path": "./Audittrail2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Audittrail2Controller"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Audittrail2"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Audittrail2": {
+        "file": "Audittrail2.web.tsx",
+        "extends": "Audittrail2Controller",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "Audittrail2Controller",
+            "path": "./Audittrail2Controller"
+          },
+          {
+            "value": "{Props}",
+            "path": "./Audittrail2Controller"
+          }
+        ]
+      }
+    }
+  }
+}

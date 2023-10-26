@@ -1,0 +1,155 @@
+.card-containers {
+  height: 400px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cards-images {
+  height: 387px;
+  width: 453px;
+}
+.right-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 329px;
+  width: 465px;
+}
+.cards-heading {
+  text-align: left;
+  font-size: 64px;
+  font-family: "Nunito", sans-serif;
+  color: #ffde59;
+}
+.cards-text {
+  font-size: 140px;
+  text-align: left;
+  font-weight: bold;
+  color: white;
+  margin-top: -26px;
+  font-family: "Fredoka", sans-serif;
+  line-height: 169px;
+}
+.cards-btn {
+  width: 334px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(16, 93, 209);
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 20px;
+  border: none;
+}
+
+
+@media (max-width: 1350px) {
+  .cards-images {
+    height: 285px;
+    width: 333px;
+  }
+  .cards-text {
+    font-size: 120px;
+  }
+  .right-cards{
+    height: 290px;
+    width: 430px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cards-text {
+    font-size: 72px;
+    line-height: 80px;
+  }
+  .cards-heading {
+   font-size: 56px;
+  }
+  .right-cards {
+    height: 215px;
+    width: 250px;
+  }
+  .cards-btn {
+    width: 230px;
+    margin-left: 14px;
+  }
+  .cards-images {
+    height: 240px;
+  }
+}
+
+@media (max-width: 991px) {
+  .cards-images {
+    height: 200px;
+    width: 250px;
+  }
+  .cards-heading {
+    font-size: 38px;
+  }
+  .cards-text {
+    line-height: 120px;
+  }
+}
+@media (max-width: 767px) {
+  .cards-images {
+    height: 150px;
+    width: 200px;
+  }
+  .cards-heading {
+    font-size: 28px;
+  }
+  .cards-text {
+    font-size: 59px;
+  }
+  .cards-btn {
+    width: 150px;
+    margin-left: 35px;
+  }
+}
+@media (max-width: 576px) {
+  .card-containers {
+    height: 155px;
+    width: 90%;
+  }
+  /* .left-cards{
+    height: 90%;
+  } */
+  .cards-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .cards-images {
+    height: 81px;
+    width: 94px;
+  }
+  .cards-text {
+    font-size: 20px;
+    line-height: normal;
+    font-weight: 400;
+  }
+  .cards-btn {
+    width: 114px;
+    height: 34px;
+    margin-top: 0px;
+    margin-left: 0px;
+    font-size: 12px;
+  }
+  .right-cards{
+    height: 70%;
+    width: 114px;
+  }
+}
+@media (max-width: 991px) {
+  .card-containers {
+    justify-content: space-around;
+    width: 100%;
+  }
+}
+

@@ -1,0 +1,65 @@
+{
+  "id": "barcodesettings",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/barcodesettings",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Barcodesettings"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Barcodesettings": {
+        "file": "Barcodesettings.tsx",
+        "extends": "BarcodesettingsController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "BarcodesettingsController",
+            "path": "./BarcodesettingsController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./BarcodesettingsController"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Barcodesettings"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Barcodesettings": {
+        "file": "Barcodesettings.web.tsx",
+        "extends": "BarcodesettingsController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "BarcodesettingsController",
+            "path": "./BarcodesettingsController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./BarcodesettingsController"
+          }
+        ]
+      }
+    }
+  }
+}

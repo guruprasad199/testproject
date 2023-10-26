@@ -1,0 +1,65 @@
+{
+  "id": "keywordsearch",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/keywordsearch",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Keywordsearch"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Keywordsearch": {
+        "file": "Keywordsearch.tsx",
+        "extends": "KeywordsearchController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "KeywordsearchController",
+            "path": "./KeywordsearchController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./KeywordsearchController"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Keywordsearch"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Keywordsearch": {
+        "file": "Keywordsearch.web.tsx",
+        "extends": "KeywordsearchController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "KeywordsearchController",
+            "path": "./KeywordsearchController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./KeywordsearchController"
+          }
+        ]
+      }
+    }
+  }
+}

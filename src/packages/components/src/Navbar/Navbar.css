@@ -1,0 +1,129 @@
+/* .navbarContainer {
+    width: 98%;
+    margin: 0 auto;
+    padding: 20px 0px;
+}
+
+.logoStyle {
+    height: 60px;
+    width: 80px;
+}
+
+.cartStyle {
+    height: 40px;
+    width: 40px;
+}
+
+.navbarContainer .d-flex {
+    display: flex !important;
+    margin: 0 0px;
+    gap: 10px;
+}
+
+.activeHome {
+    color: rgb(43, 104, 227) !important;
+    border-bottom: 2px solid rgb(43, 104, 227) !important;
+}
+
+.entryTicketButton {
+    padding: 8px 0px;
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: none;
+    font-family: "Liberteen Regular";
+    color: rgb(43, 104, 227);
+    font-weight: 600;
+    font-size: 15px;
+    width: 150px;
+    border: 1px solid rgb(43, 104, 227);
+}
+
+.loginButtonStyle {
+    padding: 10px 0px;
+    background-color: rgb(43, 104, 227);
+    border-radius: 5px;
+    box-shadow: none;
+    font-weight: 500;
+    color: white;
+    width: 80px;
+    font-family: "Liberteen Regular";
+    border: 1px solid transparent;
+}
+
+.navbarContainer .navbar-nav {
+    margin: 0px !important;
+}
+
+.navbarContainer .nav-link {
+    font-family: "Liberteen Medium" !important;
+    font-size: 14px !important;
+}
+
+.navbarContainer .navbar-expand-lg .navbar-collapse {
+    justify-content: flex-end !important;
+}
+
+.navbarContainer .nav-link {
+    border: 2px solid transparent;
+    transition: color .20s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.navbarContainer .nav-link:hover {
+    color: rgb(43, 104, 227);
+    border-bottom: 2px solid rgb(43, 104, 227) !important;
+}
+
+.navbarContainer .navbar-toggler {
+    border: none !important;
+}
+
+.navbarContainer .navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none !important;
+}
+
+.navbarRightFeature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.responsiveCart,
+.logoStyle2 {
+    display: none;
+}
+
+@media(max-width:991px) {
+    .activeHome {
+        border-bottom: 2px solid white !important;
+    }
+
+    .navbarContainer .nav-link:hover {
+        border-bottom: 2px solid white !important;
+    }
+
+    .navbarRightFeature {
+        width: 100%;
+    }
+
+    .responsiveCart,
+    .logoStyle2 {
+        display: block;
+    }
+
+    .logoStyle {
+        display: none;
+    }
+
+    #cart {
+        display: none;
+    }
+}
+
+@media(max-width:576px) {
+    .logoStyle {
+        height: 60px;
+        width: 80px;
+    }
+} */

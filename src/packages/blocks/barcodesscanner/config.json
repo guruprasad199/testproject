@@ -1,0 +1,65 @@
+{
+  "id": "barcodesscanner",
+  "version": "0.0.2",
+  "status": "preAlpha",
+  "path": "./packages/blocks/barcodesscanner",
+  "assembler-adapters": [],
+  "mobile": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Barcodesscanner"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Barcodesscanner": {
+        "file": "Barcodesscanner.tsx",
+        "extends": "BarcodesscannerController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "BarcodesscannerController",
+            "path": "./BarcodesscannerController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./BarcodesscannerController"
+          }
+        ]
+      }
+    }
+  },
+  "web": {
+    "merge-engine-navigation": {},
+    "assembler-exports": [
+      "Barcodesscanner"
+    ],
+    "assembler-dependencies": [],
+    "catalog-dependencies": [
+      "core",
+      "utilities"
+    ],
+    "assembler-devDependencies": [],
+    "merge-engine-screens": {
+      "Barcodesscanner": {
+        "file": "Barcodesscanner.web.tsx",
+        "extends": "BarcodesscannerController",
+        "ui-elements": [],
+        "imports": [
+          {
+            "value": "BarcodesscannerController",
+            "path": "./BarcodesscannerController"
+          },
+          {
+            "value": "{Props}",
+            "path": "./BarcodesscannerController"
+          }
+        ]
+      }
+    }
+  }
+}
