@@ -70,14 +70,14 @@ class AdventurePass extends Component<any> {
 const muiStyles = (theme:any)=>createStyles({
   adventureContainer: {
     background: "linear-gradient(99deg, #EB5757 0%, #D19945 72%, #FFDE59 100%)",
-    [theme.breakpoints.down('lg')]: {
-      height: 564,
-    },
     [theme.breakpoints.up('lg')]: {
       height: 575,
     },
     [theme.breakpoints.down('md')]: {
       height: 447,
+    },
+    "@media(max-width:960px)": {
+      height: '800px',
     },
     "@media(max-width:700px)": {
       height: '750px',

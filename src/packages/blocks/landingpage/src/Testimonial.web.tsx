@@ -78,6 +78,13 @@ class Testimonial extends Component<any> {
 }
 const muiSTyles = (theme:any)=>createStyles({
   dots: {
+    bottom: "-80px",
+    "@media(max-width:1190px)":{
+      bottom:"20px"
+    },
+    "@media(max-width:768px)":{
+      bottom:"50px"
+    },
     "& li.slick-active button::before": {
           width: "30px",
           backgroundColor: 'var(--primary, #2B65EC)',
@@ -111,7 +118,7 @@ testimonial:{
   "@media(max-width:1280px)":{
     height: 706,
   },
-  "@media(max-width:1024px)":{
+  "@media(max-width:1190px)":{
     height: 562,
   },
   "@media(max-width:768px)":{

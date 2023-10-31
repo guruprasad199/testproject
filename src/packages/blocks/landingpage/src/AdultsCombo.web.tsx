@@ -25,13 +25,13 @@ const useStyles = (theme: any) => createStyles({
     '@media (max-width: 1920px)': {
       padding:"40px 60px"
     },
-    '@media (max-width: 1440px)': {
+    '@media (max-width: 1650px)': {
       padding:"40px 40px"
     },
-    '@media (max-width: 1280px)': {
+    '@media (max-width: 1350px)': {
       padding: '40px 40px',
     },
-    '@media (max-width: 1024px)': {
+    '@media (max-width: 1250px)': {
       padding: '24px 24px',
     },
     '@media (max-width: 576px)': {

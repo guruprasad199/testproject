@@ -59,20 +59,25 @@ const muiSTyles = (theme: any) => createStyles({
       height: 478,
       padding:41
     },
-    "@media(max-width:1440px)":{
+    "@media(max-width:1510px)":{
       width: 426,
       height: 443,
       padding:32
     },
-    "@media(max-width:1280px)":{
+    "@media(max-width:1400px)":{
       width: 348,
       height: 415,
       padding:28
     },
-    "@media(max-width:1024px)":{
+    "@media(max-width:1190px)":{
       width: 282,
       height: 320,
       padding:20
+    },
+    "@media(max-width:950px)":{
+      width: 215,
+      height: 345,
+      gap:0
     },
     "@media(max-width:768px)":{
       width: 282,
@@ -95,6 +100,9 @@ const muiSTyles = (theme: any) => createStyles({
     },
     "@media(max-width:1280px)":{
       fontSize:14,
+    },
+    "@media(max-width:1190px)":{
+      lineHeight:"normal",
     },
     "@media(max-width:1026px)":{
       display:"none"
@@ -146,11 +154,11 @@ const muiSTyles = (theme: any) => createStyles({
       width: 110,
       height: 110,
     },
-    "@media(max-width:1280px)":{
+    "@media(max-width:1400px)":{
       width: 80,
       height: 80,
     },
-    "@media(max-width:1024px)":{
+    "@media(max-width:1190px)":{
       width: 50,
       height: 50,
     },

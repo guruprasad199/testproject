@@ -93,6 +93,10 @@ const muistyles = (theme: any) => createStyles({
         opacity: 1,
       },
     },
+    "@media(max-width:1440px)": {
+      bottom: "-12px",
+    },
+
   },
   carouselMain: {
     padding: '30px',
@@ -130,7 +134,7 @@ const muistyles = (theme: any) => createStyles({
     fontSize: '32px',
     fontVariant: 'small-caps',
     [theme.breakpoints.down('md')]: {
-      fontSize: '16px',
+      fontSize: '24px',
     }
   },
   carouselCardSubHeading: {
@@ -141,7 +145,7 @@ const muistyles = (theme: any) => createStyles({
     fontWeight: 600,
     fontSize: '20px',
     [theme.breakpoints.down('md')]: {
-      fontSize: '12px',
+      fontSize: '16px',
       fontWeight: 500,
       width:"70%",
       alignSelf:"center"
@@ -167,27 +171,35 @@ const muistyles = (theme: any) => createStyles({
     "@media(max-width:1700px)": {
       width: "730px",
     },
-    "@media(max-width:1440px)": {
+    "@media(max-width:1650px)": {
       width: 618,
       height: 387,
       padding: 20,
       gap: 16,
       borderRadius:5
     },
-    "@media(max-width:1280px)": {
+    "@media(max-width:1400px)": {
       width: 556,
       height: 357,
       padding: 20,
       gap: 16,
       borderRadius:5
     },
-    "@media(max-width:1025px)": {
-      width: 441,
-      height: 290,
+    "@media(max-width:1250px)": {
+      width: 546,
+      height: 357,
       padding: 20,
       gap: 16,
       borderRadius:5
     },
+    "@media(max-width:1200px)": {
+      width: 480,
+    },
+    "@media(max-width:1080px)": {
+      width: 441,
+      height: 290,
+    },
+
     "@media(max-width:600px)": {
       width: 304,
       height: 274,
@@ -220,20 +232,25 @@ const muistyles = (theme: any) => createStyles({
     "@media(max-width:1700px)": {
       width: "330px",
     },
-    "@media(max-width:1440px)": {
+    "@media(max-width:1650px)": {
       height: '335px',
       width: "290px",
       objectFit:"cover"
     },
-    "@media(max-width:1280px)": {
+    "@media(max-width:1400px)": {
       height: '309px',
       width: "267px",
-      objectFit:"cover"
     },
-    "@media(max-width:1024px)": {
-      height: '250px',
+    "@media(max-width:1250px)": {
+      height: '309px',
+      width: "257px",
+    },
+    "@media(max-width:1200px)": {
+      width: "215px",
+    },
+    "@media(max-width:1080px)": {
       width: "200px",
-      objectFit:"cover"
+      height: "250px"
     },
     "@media(max-width:960px)": {
       height: '250px',
@@ -245,7 +262,13 @@ const muistyles = (theme: any) => createStyles({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    height: "100%"
+    height: "100%",
+    "@media(max-width:1440px)": {
+      height: '95%',
+    },
+    "@media(max-width:1080px)": {
+      height: '100%',
+    },
   },
   carouselCardDetailInnerContainer:{
 marginTop:"-15px"
@@ -258,10 +281,7 @@ marginTop:"-15px"
     "@media(max-width:1920px)": {
       fontSize: '24px',
     },
-    "@media(max-width:1280px)": {
-      fontSize: '20px',
-    },
-    "@media(max-width:1024px)": {
+    "@media(max-width:1400px)": {
       fontSize: '16px',
     },
     "@media(max-width:960px)": {
@@ -381,11 +401,15 @@ marginTop:"-15px"
       height: '44px',
       width:"207px"
     },
-    [theme.breakpoints.down('md')]: {
-      height: 38,
-      width: "100%",
-      fontSize: '14px',
-    }
+    "@media(max-width:1200px)": {
+      height: '38px',
+      width:"173px"
+    },
+    // [theme.breakpoints.down('md')]: {
+    //   height: 38,
+    //   width: "100%",
+    //   fontSize: '14px',
+    // }
   },
   carouselBtnContainer: {
     width: '40px',
@@ -429,16 +453,19 @@ marginTop:"-15px"
     height: '40px',
     width: '40px',
     marginRight: '40px',
-    [theme.breakpoints.down('md')]: {
-      height: '20px',
-      width: '20px',
-      marginRight: '12px',
-    },
-    "@media(max-width:1300px)": {
+    "@media(max-width:1750px)": {
       marginRight: '25px',
     },
+    "@media(max-width:1279px)": {
+      height: '30px',
+      width: '30px',
+      marginRight: '12px',
+    },
+    "@media(max-width:1000px)": {
+      marginRight: '6px',
+    },
     "@media(max-width:400px)": {
-      marginRight: '15px',
+      marginRight: '2px',
     },
   },
   arrowStylePre: {
@@ -446,17 +473,20 @@ marginTop:"-15px"
     width: '40px',
     transform: 'rotate(180deg)',
     marginLeft: '40px',
-    [theme.breakpoints.down('md')]: {
-      height: '20px',
-      width: '20px',
-      transform: 'rotate(180deg)',
-      marginLeft: '12px',
-    },
-    "@media(max-width:1300px)": {
+    "@media(max-width:1750px)": {
       marginLeft: '25px',
     },
+    "@media(max-width:1279px)": {
+      marginLeft: '12px',
+      height: '30px',
+      width: '30px',
+    },
+    "@media(max-width:1000px)": {
+      marginLeft: '6px',
+    },
+
     "@media(max-width:400px)": {
-      marginLeft: '15px',
+      marginLeft: '2px',
     },
   }
 })

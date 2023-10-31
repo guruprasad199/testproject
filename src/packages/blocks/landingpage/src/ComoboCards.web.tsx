@@ -49,13 +49,13 @@ const styles = (theme: any) => createStyles({
     '@media (max-width: 1920px)': {
       gap: 36
     },
-    '@media (max-width: 1440px)': {
+    '@media (max-width: 1650px)': {
       gap: 28
     },
-    '@media (max-width: 1280px)': {
+    '@media (max-width: 1350px)': {
       gap: 20
     },
-    '@media (max-width: 1024px)': {
+    '@media (max-width: 1250px)': {
       padding:"10px 0px 10px 10px",
     },
     '@media (max-width: 576px)': {
@@ -75,19 +75,22 @@ const styles = (theme: any) => createStyles({
       width: 442,
       height: 370,
     },
-    '@media (max-width: 1440px)': {
+    '@media (max-width: 1650px)': {
       width: '345px',
       height: '290px',
     },
-    '@media (max-width: 1280px)': {
+    '@media (max-width: 1350px)': {
       width: '320',
       height: '290',
     },
-    '@media (max-width: 1024px)': {
+    '@media (max-width: 1250px)': {
       width: '260',
       height: '250',
     },
 
+    '@media only screen and (min-width: 959px) and (max-width: 1010px)': { 
+      width: '230',
+  },
     '@media (max-width: 576px)': {
       width: '100%',
       height: '281px',
@@ -124,7 +127,7 @@ width:"100%"
     fontFamily: 'Liberteen Medium, sans-serif',
     color: '#2b65ec',
     marginBottom: 0,
-    '@media (max-width: 1280px)': {
+    '@media (max-width: 1400px)': {
       fontSize: 20,
       fontWeight: 700,
     },
@@ -160,7 +163,10 @@ width:"100%"
     '@media (max-width: 1920px)': {
       fontSize: '30px',
     },
-    '@media (max-width: 1280px)': {
+    '@media (max-width: 1540px)': {
+      fontSize: '20px',
+    },
+    '@media (max-width: 1350px)': {
       fontSize: '20px',
     },
     '@media (max-width: 1024px)': {
@@ -235,7 +241,7 @@ width:"100%"
       width: '225px',
       height: "48px"
     },
-    '@media (max-width: 1024px)': {
+    '@media (max-width: 1250px)': {
       width: 185,
       height: 38
     },
