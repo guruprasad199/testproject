@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/contentmanagement/__tests__/step-definitions/ContentManagement.web.test.tsx">
-        <testCase name="ContentManagement User navigates to ContentManagement" duration="235"/>
-        <testCase name="ContentManagement Handle API errors" duration="17"/>
+    <file path="/home/deq/Desktop/testproject/src/packages/blocks/contentmanagement/__tests__/step-definitions/ContentManagement.web.test.tsx">
+        <testCase name="ContentManagement User navigates to ContentManagement" duration="138"/>
+        <testCase name="ContentManagement Handle API errors" duration="13"/>
     </file>
-    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/contentmanagement/__tests__/step-definitions/ContentManagement.steps.tsx">
-        <testCase name="ContentManagement User navigates to ContentManagement" duration="1092"/>
-        <testCase name="ContentManagement Handle API errors" duration="249"/>
+    <file path="/home/deq/Desktop/testproject/src/packages/blocks/contentmanagement/__tests__/step-definitions/ContentManagement.steps.tsx">
+        <testCase name="ContentManagement User navigates to ContentManagement" duration="689"/>
+        <testCase name="ContentManagement Handle API errors" duration="162"/>
     </file>
-    <file path="/data/home/ubuntu/Desktop/eodindia1-351975-react/src/packages/blocks/contentmanagement/__tests__/step-definitions/AboutUs.web.steps.tsx">
-        <testCase name="AboutUs User navigates to  AboutUs" duration="93"/>
+    <file path="/home/deq/Desktop/testproject/src/packages/blocks/contentmanagement/__tests__/step-definitions/AboutUs.web.steps.tsx">
+        <testCase name="AboutUs User navigates to  AboutUs" duration="35"/>
     </file>
 </testExecutions>

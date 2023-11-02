@@ -14,7 +14,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import Navbar from "../../../components/src/Navbar/Navbar.web";
 import Footer from "../../../components/src/Footer/Footer.web";
 import AboutUsController, { Props } from "./AboutUsController.web";
-import { banner, RightImg } from "./assets";
+import { banner } from "./assets";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const theme = createTheme({
@@ -33,29 +33,25 @@ export type EntertainmentProps = {
 
 export type IProps = {
   classes?: any;
+  mappedData: any;
 };
 
 export const Zipline: React.FunctionComponent<IProps> = (props) => {
+  const accordion =
+    props.mappedData?.additional_data &&
+    Object.keys(props.mappedData?.additional_data);
+
   return (
     <Box className={props.classes?.cards}>
       <Box className={props.classes?.mainWrapper}>
-        <Typography className={props.classes?.cardheader}>Zipline</Typography>
-        <Typography variant="body2" className={props.classes?.carddescription}>
-          EOD Park offers an exhilarating zipline experience that will leave you
-          breathless. Nestled amidst the lush greenery, this outdoor adventure
-          destination promises an unforgettable adrenaline rush.
-          <br /> <br />
-          The zipline course spans across the picturesque landscape, allowing
-          participants to soar through the air like a bird, taking in stunning
-          panoramic views below. With a perfect balance of thrill and safety,
-          EOD Park's zipline boasts state-of-the-art equipment and
-          professionally trained guides who ensure a secure and enjoyable
-          journey.
-          <br /> <br />
-          Whether you're an adventure seeker or a nature lover, the zipline in
-          EOD Park guarantees an unforgettable and awe-inspiring experience that
-          will leave you craving for more.
+        <Typography className={props.classes?.cardheader}>
+          {props?.mappedData?.name}
         </Typography>
+        <Typography
+          variant="body2"
+          className={props.classes?.carddescription}
+          dangerouslySetInnerHTML={{ __html: props.mappedData?.description }}
+        ></Typography>
         <Box style={{ padding: "10px 0px 16px 0px" }}>
           <Accordion>
             <AccordionSummary
@@ -65,14 +61,12 @@ export const Zipline: React.FunctionComponent<IProps> = (props) => {
               className={props.classes?.accordianWrapper}
             >
               <Typography className={props.classes?.accordianTitle}>
-                error sit voluptatem accusantium
+                {accordion && accordion[0]}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography className={props.classes?.accordianDescription}>
-                error sit voluptatem accusantium doloremque laudantium, totam
-                rem aperiam, eaque ipsa quae ab illo inventore veritatis et
-                quasi architecto beatae.
+                {props.mappedData?.additional_data[accordion[0]]}
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -86,47 +80,25 @@ export const Zipline: React.FunctionComponent<IProps> = (props) => {
             className={props.classes?.accordianWrapper}
           >
             <Typography className={props.classes?.accordianTitle}>
-              error sit voluptatem accusantium
+              {accordion && accordion[1]}
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography className={props.classes?.accordianDescription}>
-              error sit voluptatem accusantium doloremque laudantium, totam rem
-              aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-              architecto beatae.
+              {props.mappedData?.additional_data[accordion[1]]}
             </Typography>
           </AccordionDetails>
         </Accordion>
       </Box>
-      <Box>
-        <img className={props.classes?.sideImg} src={RightImg} alt="rightimg" />
+      <Box className={props.classes?.container}>
+        <img
+          className={props.classes?.sideImg}
+          src={props.mappedData?.image}
+          alt="rightimg"
+        />
       </Box>
     </Box>
   );
-};
-
-export const Entertainment: React.FunctionComponent<EntertainmentProps> = (props) => {
-  switch (props.value) {
-    case "Zipline":
-      return <Zipline classes={props.classes} />;
-
-    case "Bowling":
-      return (
-        <Box className={props.classes?.emptyTabs}>
-          <Typography className={props.classes?.cardheader}>Bowling</Typography>
-        </Box>
-      );
-
-    case "Rain Dance":
-      return (
-        <Box className={props.classes?.emptyTabs}>
-          <Typography className={props.classes?.cardheader}>Rain Dance</Typography>
-        </Box>
-      );
-
-    default:
-      return <Zipline />;
-  }
 };
 
 export default class Aboutus extends AboutUsController {
@@ -136,10 +108,9 @@ export default class Aboutus extends AboutUsController {
 
   render() {
     return (
+      // Customizable Area Start
       <ThemeProvider theme={theme}>
         <Box>
-          {/* Customizable Area Start */}
-
           <Navbar onLogin={undefined} />
           <Box width={"100%"}>
             <img
@@ -163,35 +134,37 @@ export default class Aboutus extends AboutUsController {
                 facilities which we have painstakingly made.
               </Typography>
             </Box>
-                    <Box className={this.props.classes?.wrapBtnModel}>
-                        <Box className={this.props.classes?.buttonsToggle}>
-                            {
-                                ButtonToggleClick && ButtonToggleClick.map((items: any,index:any) => 
-                                    <Button
-                                    key={index}
-                                        data-test-id="btnToggle"
-                                        onClick={() => this.setState({ ToggleButton: items.name })}
-                                        className={this.state.ToggleButton === items.name ? this.props.classes?.buttonContainerActive : this.props.classes?.buttonContainer}>
-                                        {items.name}
-                                    </Button>
-                                )
-                            }
-
-                        </Box>
-              <Box>
-                <Entertainment
-                  value={this.state.ToggleButton}
-                  classes={this.props.classes}
-                />
+            <Box className={this.props.classes?.wrapBtnModel}>
+              <Box className={this.props.classes?.buttonsToggle}>
+                {this.state.parkActivities &&
+                  this.state.parkActivities?.map((items: any, index: any) => (
+                    <Button
+                      key={index}
+                      data-test-id="btnToggle"
+                      onClick={() => this.handleTabClick(items.name)}
+                      className={
+                        this.state.ToggleButton === items.name
+                          ? this.props.classes?.buttonContainerActive
+                          : this.props.classes?.buttonContainer
+                      }
+                    >
+                      {items.name}
+                    </Button>
+                  ))}
               </Box>
+            </Box>
+            <Box>
+              <Zipline
+                classes={this.props.classes}
+                mappedData={this.state.contentMapper}
+              />
             </Box>
           </Box>
           <Footer />
-
-          {/* Customizable End Start */}
         </Box>
       </ThemeProvider>
       //Merge Engine End DefaultContainer
+      // Customizable Area End
     );
   }
 }
@@ -252,6 +225,10 @@ const styles = (theme: Theme) =>
       fontSize: "14px",
       color: "#000",
     },
+    sideImg: {
+      width: "608px",
+      height: "456px",
+    },
     buttonsToggle: {
       display: "flex",
       margin: "auto",
@@ -260,17 +237,17 @@ const styles = (theme: Theme) =>
       background: "#F3F9FD",
       width: "max-content",
       borderRadius: "5px",
-      paddingBottom: "40px",
     },
     cards: {
       display: "flex",
       justifyContent: "center",
       gridGap: "120px",
+      marginBottom: "64px",
     },
     emptyTabs: {
       width: "65%",
       margin: "auto",
-      paddingBottom: "100px"
+      paddingBottom: "100px",
     },
     imageContainer: {
       width: "100%",
@@ -340,7 +317,7 @@ const styles = (theme: Theme) =>
       },
       cards: {
         width: "90%",
-        margin: "0 auto",
+        margin: "0 auto 64px auto",
       },
     },
     "@media (max-width: 1300px)": {
@@ -357,21 +334,33 @@ const styles = (theme: Theme) =>
     "@media (max-width: 700px)": {
       buttonsToggle: {
         width: "min-content",
-        padding: "0px 10px 30px 10px",
+        padding: "0px 10px 0px 10px",
+        overflowX: "auto",
+        maxWidth: "100%",
+        justifyContent: "initial",
       },
       cards: {
         flexDirection: "column-reverse",
         gridGap: "40px",
       },
+      sideImg: {
+        width: "335px",
+        height: "251px",
+      },
+      container: {
+        margin: "0 auto",
+      },
       buttonContainerActive: {
         width: "125px",
         height: "34px",
         fontSize: "14px",
+        minWidth: "125px",
       },
       buttonContainer: {
         width: "125px",
         height: "34px",
         fontSize: "14px",
+        minWidth: "125px",
       },
       mainWrapper: {
         width: "90%",
@@ -404,6 +393,11 @@ const styles = (theme: Theme) =>
       },
       imageContainer: {
         height: "220px",
+      },
+    },
+    "@media (max-width: 360px)": {
+      sideImg: {
+        width: "255px",
       },
     },
   });

@@ -34,4 +34,5 @@ exports.success='Product Added Successfully'
 exports.refundPolicyContentType = "application/json";
 exports.refundPolicyApimethod = "GET";
 exports.refundPolicyEndPoint = "/bx_block_terms_and_conditions/refund_policies";
+exports.apiEndPointAboutus = "bx_block_content_management/about_us"
 // Customizable Area End
