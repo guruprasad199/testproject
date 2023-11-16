@@ -12,6 +12,7 @@ export interface Props {
   navigation: any;
   id: string;
   // Customizable Area Start
+  classes?: any
   // Customizable Area End
 }
 

@@ -202,7 +202,6 @@ export default class RolesandpermissionsController extends BlockComponent<
   
   async componentDidMount() {
     this.getCardData();
-    console.log("222222222222222222222")
   }
 
   // Customizable Area End

@@ -5,3 +5,4 @@ export const downArrow = require("../assets/down.png");
 export const checked = require("../assets/check_box.png");
 export const unchecked = require("../assets/blank_check_box.png");
 export const Delete = require("../assets/delete.png");
+export const annulPassBanner = require("../assets/annualPass.png");

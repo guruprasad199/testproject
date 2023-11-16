@@ -107,20 +107,20 @@ module.exports = function override(config, env) {
   config.plugins.push(
     new webpack.DefinePlugin({ __DEV__: env !== 'production' }),
     //gzip
-    new CompressionPlugin({
-      filename: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.(js|css|html|svg)$/,
-      threshold: 8192,
-      minRatio: 0.8
-    }),
+    // new CompressionPlugin({
+    //   filename: '[path].gz[query]',
+    //   algorithm: 'gzip',
+    //   test: /\.(js|css|html|svg)$/,
+    //   threshold: 8192,
+    //   minRatio: 0.8
+    // }),
     //brotli plugin
-    new BrotliPlugin({ 
-      asset: '[path].br[query]',
-      test: /\.(js|css|html|svg)$/,
-      threshold: 10240,
-      minRatio: 0.8
-    }),
+    // new BrotliPlugin({ 
+    //   asset: '[path].br[query]',
+    //   test: /\.(js|css|html|svg)$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // }),
   )
   config.resolve.alias = {'react-native-maps': 'react-native-web-maps', 'react-native': 'react-native-web'};
   return config
