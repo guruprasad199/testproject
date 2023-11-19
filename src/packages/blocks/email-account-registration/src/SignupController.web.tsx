@@ -15,7 +15,7 @@ export interface Props {
     navigation: any;
     id: string;
     // Customizable Area Start
-    classes:any
+    classes?:any
     history:any
     // Customizable Area End
 }
@@ -30,6 +30,9 @@ interface S {
     loading: boolean
     isSignupModal: boolean,
     registrationStatus: string,
+    signupData: any;
+    isAlertOpen: boolean;
+    signUpOpen: boolean;
     // Customizable Area End
 }
 
@@ -68,6 +71,9 @@ export default class SignupController extends BlockComponent<
             loading: false,
             isSignupModal: false,
             registrationStatus: "",
+            signupData: null,
+            isAlertOpen: false,
+            signUpOpen: false,
         };
 
 
@@ -184,8 +190,21 @@ export default class SignupController extends BlockComponent<
         this.setState({isSignupModal: false, registrationStatus: ""})
     }
 
-   
+    getSignupData = (data: any) => {
+        this.setState({ signupData: data });
+        if (data?.access_token.length !== 0) {
+          this.setState({ signUpOpen: true });
+          window.setTimeout(() => {
+            this.props.history?.push("/");
+          }, 3000);
+        } else {
+          this.setState({ signUpOpen: false });
+        }
+      };
 
+      closeHandle = () => {
+        this.setState({ signUpOpen: false });
+      };
     // Customizable Area End
 
 

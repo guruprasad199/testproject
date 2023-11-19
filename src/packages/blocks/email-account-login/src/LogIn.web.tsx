@@ -9,16 +9,19 @@ import {
   IconButton,
   TextField,
   Link,
-  Modal,
+  Snackbar,
+  createStyles,
+  Theme,
+  withStyles,
 } from "@material-ui/core";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Visibility from "@material-ui/icons/Visibility";
 import SignInController, { Props } from "./LogInController.web";
 import { Formik, Field, Form, ErrorMessage, getIn } from "formik";
 import * as Yup from "yup";
-import { Logo, RightImg, crossImg, google, warning } from "./assets";
+import { Logo, RightImg, google, warning } from "./assets";
 import { LoginSocialGoogle } from "reactjs-social-login";
+import MuiAlert from "@material-ui/lab/Alert";
 
 // Customizable Area End
 
@@ -29,32 +32,40 @@ export default class SignIn extends SignInController {
     // Customizable Area End
   }
   // Customizable Area Start
+
+  successPopUp = () => {
+    return (
+      <Snackbar
+        open={this.state.open}
+        autoHideDuration={6000}
+        onClose={this.handleClose}
+      >
+        <MuiAlert
+          onClose={this.handleClose}
+          severity="success"
+          variant="filled"
+        >
+          Login Successful!
+        </MuiAlert>
+      </Snackbar>
+    );
+  };
+
   renderFlatlist = () => {
     return (
-      <Modal
+      <Snackbar
         open={this.state.isModalOpen}
+        autoHideDuration={6000}
         onClose={this.handleModalClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        data-testid="new_spend_modal"
       >
-        <Box style={webStyle.modalContainer}>
-          <img src={crossImg} alt="crossIcon" style={{ width: "50px" }} />
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            style={{
-              color: "#000000",
-              fontFamily: "Montserrat",
-              fontWeight: 500,
-              marginTop: "15px",
-            }}
-          >
-            Login Failed
-          </Typography>
-        </Box>
-      </Modal>
+        <MuiAlert
+          onClose={this.handleModalClose}
+          severity="error"
+          variant="filled"
+        >
+          Login Failed!
+        </MuiAlert>
+      </Snackbar>
     );
   };
 
@@ -73,8 +84,21 @@ export default class SignIn extends SignInController {
 
         <ErrorMessage name="email">
           {(errorMessage) => (
-            <div style={webStyle.emailLoginError}>
-              <img src={warning} alt="warning" style={webStyle.customError} />
+            <div
+              style={{
+                color: "red",
+                marginTop: "10px",
+                fontFamily: "Montserrat",
+                marginLeft: "-3px",
+                marginBottom: "10px",
+                fontSize: "11px",
+              }}
+            >
+              <img
+                src={warning}
+                alt="warning"
+                style={{ marginRight: "5px", marginBottom: "4px" }}
+              />
               Please enter a valid email address
             </div>
           )}
@@ -89,23 +113,17 @@ export default class SignIn extends SignInController {
       // Customizable Area Start
       // Required for all blocks
 
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className={this.props.classes?.mainWrapper}>
+        <Box className={this.props.classes?.rightCard}>
+          <img className={this.props.classes?.rightCardImg} src={RightImg} alt="RightImg" />
+          <div />
+        </Box>
         <Box sx={{ width: "100%" }}>
-          <Box style={webStyle.mainContainer}>
-            <Box>
-              <img src={Logo} alt="logo" />
+          <Box className={this.props.classes?.mainContainer}>
+            <Box className={this.props.classes?.logoContainer}>
+              <img src={Logo} alt="logo" className={this.props.classes?.imgLogo} />
               <Typography
-                variant="h4"
-                style={{
-                  marginTop: "20px",
-                  lineHeight: "2",
-                  fontSize: "20px",
-                  fontWeight: 700,
-                  fontFamily: "Montserrat, sans-serif",
-                  letterSpacing: "-0.12px",
-                  width: "241px",
-                }}
-              >
+                variant="h4" className={this.props.classes?.descriptionText}>
                 Sign in Adventure Park
               </Typography>
             </Box>
@@ -117,44 +135,27 @@ export default class SignIn extends SignInController {
                 discoveryDocs="claims_supported"
                 access_type="online"
                 onResolve={({ provider, data }) => {
-                  this.getProfileData(data)
+                  this.getProfileData(data);
                 }}
                 onReject={(error) => {
-                  this.getProfileData(error)
+                  this.getProfileData(error);
                 }}
                 isOnlyGetToken={false}
               >
-                <Box style={webStyle.googleAcc}>
-                  <img src={google} alt="google" />
-                  <Typography
-                    style={{
-                      fontFamily: "Montserrat,sans-serif",
-                      fontSize: "16px",
-                      color: "#0F172A",
-                      fontWeight: 600,
-                    }}
-                  >
+                <Box className={this.props.classes?.googleAcc}>
+                  <img src={google} alt="google" className={this.props.classes?.googleIcon} />
+                  <Typography className={this.props.classes?.googleText}>
                     Continue with Google
                   </Typography>
                 </Box>
               </LoginSocialGoogle>
               <Box mt={"34px"} style={{ position: "relative" }} pt={"10px"}>
-                <Box style={{ borderTop: "1px solid #E2E8F0" }}></Box>
-                <Box
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    bottom: 0,
-                    left: "40%",
-                    background: "#fff",
-                    width: "60px",
-                  }}
-                >
-                  <Typography style={webStyle.orstyle}>OR</Typography>
+                <Box style={{ borderTop: "1px solid #E2E8F0" }} />
+                <Box className={this.props.classes.orTextContent}>
+                  <Typography className={this.props.classes?.orstyle}>OR</Typography>
                 </Box>
               </Box>
             </Box>
-
             <Box mt={5}>
               <Formik
                 data-test-id="FormikID"
@@ -186,12 +187,12 @@ export default class SignIn extends SignInController {
                 <Form translate={undefined}>
                   <Grid container spacing={3}>
                     <Grid item xs={12}>
-                      <label style={webStyle.Emaillabel} htmlFor="email">
+                      <label className={this.props.classes?.Emaillabel} htmlFor="email">
                         Email
                       </label>
 
                       <Field
-                        className="email"
+                        className={this.props.classes?.customEmail}
                         data-test-id="signupInputEmail"
                         component={this.customInput}
                         id="email"
@@ -207,7 +208,7 @@ export default class SignIn extends SignInController {
                     </Grid>
 
                     <Grid item xs={12}>
-                      <label style={webStyle.label} htmlFor="password">
+                      <label className={this.props.classes?.label} htmlFor="password">
                         Password
                       </label>
 
@@ -221,7 +222,7 @@ export default class SignIn extends SignInController {
                         fullWidth
                         placeholder="**********"
                         helperText={
-                          <Typography style={webStyle.required}>
+                          <Typography className={this.props.classes?.required}>
                             <ErrorMessage name="password" />
                           </Typography>
                         }
@@ -241,7 +242,7 @@ export default class SignIn extends SignInController {
                           ),
                         }}
                       />
-                      <span style={webStyle.description}>
+                      <span className={this.props.classes?.description}>
                         The password must be minimum 8 characters, include at
                         least one capital, one lowercase, one number and one
                         special character.
@@ -255,18 +256,7 @@ export default class SignIn extends SignInController {
                       >
                         {" "}
                         <Link
-                          href="/ForgotPassword"
-                          style={{
-                            color: "#FF3131",
-                            textAlign: "right",
-                            fontFamily: "Montserrat",
-                            fontSize: "12px",
-                            fontStyle: "normal",
-                            fontWeight: 500,
-                            lineHeight: "normal",
-                            letterSpacing: "-0.12px",
-                          }}
-                        >
+                          href="/ForgotPassword" className={this.props.classes?.forgotPass}>
                           Forgot Password?
                         </Link>{" "}
                       </Typography>
@@ -285,9 +275,9 @@ export default class SignIn extends SignInController {
                           data-test-id="btnRememberMe"
                           id="remember"
                           name="remember"
-                          style={webStyle.remember}
+                          className={this.props.classes?.remember}
                         />
-                        <label htmlFor="remember" style={webStyle.agreeText}>
+                        <label htmlFor="remember" className={this.props.classes?.agreeText}>
                           I agree with{" "}
                           <Link
                             href=""
@@ -313,7 +303,7 @@ export default class SignIn extends SignInController {
                           and Conditions.
                         </label>
                       </Box>
-                      <Typography style={webStyle.rememberRequired}>
+                      <Typography className={this.props.classes?.rememberRequired}>
                         <ErrorMessage name="remember" />
                       </Typography>
                     </Grid>
@@ -327,12 +317,12 @@ export default class SignIn extends SignInController {
                         <Button
                           data-test-id="btnEmailLogIn"
                           type="submit"
-                          style={webStyle.signbtn}
+                          className={this.props.classes?.signbtn}
                           size="large"
                         >
                           Sign in
                         </Button>
-                        <Typography style={webStyle.accountLink}>
+                        <Typography className={this.props.classes?.accountLink}>
                           {" "}
                           Don't have an account?{" "}
                           <Link
@@ -350,10 +340,8 @@ export default class SignIn extends SignInController {
             </Box>
           </Box>
         </Box>
-        <Box style={webStyle.rightCard}>
-          <img style={webStyle.rightCardImg} src={RightImg} alt="RightImg" />
-        </Box>
         {this.renderFlatlist()}
+        {this.successPopUp()}
       </div>
 
       // Customizable Area End
@@ -362,181 +350,286 @@ export default class SignIn extends SignInController {
 }
 
 // Customizable Area Start
-const webStyle = {
-  rightCard: {
-    height: "100%",
-    width: "100%",
-  },
-  rightCardImg: {
-    width: "100%",
-    height: "80rem",
-  },
-  remember: {
-    background: "#3618B1",
-    fontFamily: "Montserrat",
-    fontStyle: "normal",
-    fontWeight: 400,
-    fontSize: "14px",
-    width: "20px",
-    height: "20px",
-  },
-  rememberRequired: {
-    color: "red",
-    marginTop: "10px",
-    fontFamily: "Montserrat",
-    marginBottom: "10px",
-    fontSize: "11px",
-  },
-  googleStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 6,
-    borderWidth: 0,
-    borderRadius: 5,
-    marginTop: 32,
-  },
-  imgBlock: {
-    border: "1px solid grey",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    textAlign: "center",
-    padding: "20px",
-    borderRadius: "5px",
-  } as React.CSSProperties,
 
-  googleAcc: {
-    border: "1px solid #CBD5E1",
-    padding: "10px",
-    borderRadius: "8px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "10px",
-    height: "56px",
-  },
-
-  customEmail: {
-    width: "100%",
-    height: "56px",
-    borderRadius: "4px",
-  },
-
-  orstyle: {
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: "#64748B",
-    textAlign: "center",
-    fontFamily: "Montserrat,sans-serif",
-    width: "23px",
-    margin: "0 20px",
-  } as React.CSSProperties,
-
-  accountLink: {
-    textAlign: "center",
-    fontFamily: "Montserrat, sans-serif",
-    fontSize: "16px",
-    lineHeight: "30px",
-    fontWeight: 400,
-    color: "#0F172A",
-  } as React.CSSProperties,
-
-  signbtn: {
-    background: "#2B65EC",
-    borderRadius: "10px",
-    width: "100%",
-    height: "56px",
-    color: "#FFF",
-    fontFamily: "Montserrat, sans-serif",
-    fontStyle: "normal",
-    fontWeight: 600,
-    fontSize: "18px",
-    textTransform: "none",
-  } as React.CSSProperties,
-  label: {
-    fontStyle: "normal",
-    fontWeight: 700,
-    marginBottom: "10px",
-    fontFamily: "Montserrat, sans-serif",
-    color: "#0F172A",
-    fontSize: "16px",
-    letterSpacing: "0.2px",
-  } as React.CSSProperties,
-
-  Emaillabel: {
-    fontStyle: "normal",
-    fontWeight: 700,
-    marginBottom: "10px",
-    fontFamily: "Montserrat, sans-serif",
-    color: "#0F172A",
-    fontSize: "16px",
-    width: "48px",
-  },
-
-  required: {
-    color: "red",
-    marginTop: "10px",
-    fontFamily: "Montserrat",
-    marginLeft: "-14px",
-    marginBottom: "10px",
-    fontSize: "11px",
-  } as React.CSSProperties,
-
-  emailLoginError: {
-    color: "red",
-    marginTop: "10px",
-    fontFamily: "Montserrat",
-    marginLeft: "-3px",
-    marginBottom: "10px",
-    fontSize: "11px",
-  } as React.CSSProperties,
-
-  passwordError: {
-    color: "red",
-    marginTop: "10px",
-    fontFamily: "Montserrat",
-    marginBottom: "10px",
-    fontSize: "11px",
-  } as React.CSSProperties,
-
-  customError: {
-    marginRight: "5px",
-    marginBottom: "4px",
-  } as React.CSSProperties,
-
-  description: {
-    color: "#64748B",
-    fontWeight: 400,
-    fontSize: "11px",
-    fontFamily: "Montserrat",
-  },
-  mainContainer: {
-    width: "360px",
-    margin: "147px auto 0px auto",
-  },
-  agreeText: {
-    fontSize: "14px",
-    color: "#0F172A",
-    fontFamily: "Montserrat",
-    fontStyle: "normal",
-    fontWeight: 400,
-    lineHeight: "22px",
-  },
-  modalContainer: {
-    background: "#FFFAFA",
-    width: "400px",
-    border: "1px solid black",
-    height: "250px",
-    position: "absolute",
-    top: "30%",
-    left: "30%",
-    borderRadius: "12px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  } as React.CSSProperties,
-};
+const styles = (theme: Theme) =>
+  createStyles({
+    mainWrapper: {
+      display: "flex",
+      flexDirection: "row-reverse",
+    },
+    rightCard: {
+      height: "100%",
+      width: "100%",
+    },
+    rightCardImg: {
+      width: "100%",
+      height: "80rem",
+    },
+    remember: {
+      background: "#3618B1",
+      fontFamily: "Montserrat",
+      fontStyle: "normal",
+      fontWeight: 400,
+      fontSize: "14px",
+      width: "20px",
+      height: "20px",
+    },
+    rememberRequired: {
+      color: "red",
+      marginTop: "10px",
+      fontFamily: "Montserrat",
+      marginBottom: "10px",
+      fontSize: "11px",
+    },
+    googleStyle: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      elevation: 6,
+      borderWidth: 0,
+      borderRadius: 5,
+      marginTop: 32,
+    },
+    imgBlock: {
+      border: "1px solid grey",
+      display: "flex",
+      justifyContent: "center",
+      flexDirection: "column",
+      textAlign: "center",
+      padding: "20px",
+      borderRadius: "5px",
+    },
+    googleAcc: {
+      border: "1px solid #CBD5E1",
+      padding: "10px",
+      borderRadius: "8px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "10px",
+      height: "56px",
+      cursor: "pointer",
+    },
+    forgotPass: {
+      color: "#FF3131",
+      textAlign: "right",
+      fontFamily: "Montserrat",
+      fontSize: "12px",
+      fontStyle: "normal",
+      fontWeight: 500,
+      lineHeight: "normal",
+      letterSpacing: "-0.12px",
+    },
+    googleText: {
+      fontFamily: "Montserrat,sans-serif",
+      fontSize: "16px",
+      color: "#0F172A",
+      fontWeight: 600,
+    },
+    customEmail: {
+      width: "100%",
+      height: "50.4px",
+      borderRadius: "4px",
+      background: "red",
+    },
+    orstyle: {
+      fontSize: "14px",
+      fontWeight: "bold",
+      color: "#64748B",
+      textAlign: "center",
+      fontFamily: "Montserrat,sans-serif",
+      width: "23px",
+      margin: "0 20px",
+    },
+    accountLink: {
+      textAlign: "center",
+      fontFamily: "Montserrat, sans-serif",
+      fontSize: "16px",
+      lineHeight: "30px",
+      fontWeight: 400,
+      color: "#0F172A",
+    },
+    signbtn: {
+      background: "#2B65EC",
+      borderRadius: "10px",
+      width: "100%",
+      height: "56px",
+      color: "#FFF",
+      fontFamily: "Montserrat, sans-serif",
+      fontStyle: "normal",
+      fontWeight: 600,
+      fontSize: "18px",
+      textTransform: "none",
+    },
+    label: {
+      fontStyle: "normal",
+      fontWeight: 700,
+      marginBottom: "10px",
+      fontFamily: "Montserrat, sans-serif",
+      color: "#0F172A",
+      fontSize: "16px",
+      letterSpacing: "0.2px",
+    },
+    descriptionText: {
+      marginTop: "20px",
+      lineHeight: "2",
+      fontSize: "20px",
+      fontWeight: 700,
+      fontFamily: "Montserrat, sans-serif",
+      letterSpacing: "-0.12px",
+      width: "241px",
+    },
+    orTextContent: {
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: "40%",
+      background: "#fff",
+      width: "60px",
+    },
+    Emaillabel: {
+      fontStyle: "normal",
+      fontWeight: 700,
+      marginBottom: "10px",
+      fontFamily: "Montserrat, sans-serif",
+      color: "#0F172A",
+      fontSize: "16px",
+      width: "48px",
+    },
+    required: {
+      color: "red",
+      marginTop: "10px",
+      fontFamily: "Montserrat",
+      marginLeft: "-14px",
+      marginBottom: "10px",
+      fontSize: "11px",
+    },
+    passwordError: {
+      color: "red",
+      marginTop: "10px",
+      fontFamily: "Montserrat",
+      marginBottom: "10px",
+      fontSize: "11px",
+    },
+    description: {
+      color: "#64748B",
+      fontWeight: 400,
+      fontSize: "11px",
+      fontFamily: "Montserrat",
+    },
+    mainContainer: {
+      width: "360px",
+      margin: "147px auto 0px auto",
+    },
+    agreeText: {
+      fontSize: "14px",
+      color: "#0F172A",
+      fontFamily: "Montserrat",
+      fontStyle: "normal",
+      fontWeight: 400,
+      lineHeight: "22px",
+    },
+    modalContainer: {
+      background: "#FFFAFA",
+      width: "400px",
+      border: "1px solid black",
+      height: "250px",
+      position: "absolute",
+      top: "30%",
+      left: "30%",
+      borderRadius: "12px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    "@media (max-width: 750px)": {
+      mainWrapper: {
+        flexDirection: "column",
+      },
+      rightCard: {
+        background:
+          "linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgb(255 255 255 / 99%) 88%)",
+      },
+      rightCardImg: {
+        position: "relative",
+        zIndex: -1,
+        display: "block",
+        height: "40rem"
+      },
+      logoContainer: {
+        display: "flex",
+        flexDirection: "column",
+        margin: "0 auto"
+      },
+      imgLogo: {
+        margin: "0 auto",
+        width: "120px",
+        height: "94px",
+      },
+      descriptionText: {
+        width: "100%",
+        textAlign: "center",
+        fontSize: "18px",
+      }, 
+      mainContainer: {
+        margin: "-430px auto 0px auto",
+      },
+      googleAcc: {
+        background: "#FFFFFF",
+      },
+      orTextContent: {
+        background: "initial"
+      },
+    },
+    "@media (max-width: 400px)": {
+      mainContainer: {
+        width: "324px",
+      },
+      googleAcc: {
+        height: "50.4px"
+      },
+      googleText: {
+        fontSize: "14.4px",
+      },
+      googleIcon: {
+        width: "21.6px",
+        height: "21.6px",
+      },
+      orstyle: {
+        fontSize: "12.6px",
+      },
+      Emaillabel: {
+        fontSize: "14.4px",
+      },
+      label: {
+        fontSize: "14.4px",
+      },
+      agreeText: {
+        fontSize: "12.6px",
+      },
+      forgotPass: {
+        fontSize: "10.8px",
+      },
+      remember: {
+        width: "18px",
+        height: "18px",
+      },
+      signbtn: {
+        height: "50.4px",
+        fontSize: "14.4px",
+      },
+      accountLink: {
+        fontSize: "14.4px",
+      },
+    },
+    "@media (max-width: 340px)": {
+      mainContainer: {
+        width: "280px",
+      },
+    },
+  });
+const LoginWebWithStyle = withStyles(styles)(SignIn);
+export { LoginWebWithStyle };
 
 // Customizable Area End

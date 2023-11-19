@@ -15,7 +15,7 @@ export interface Props {
   navigation: any;
   id: string;
   // Customizable Area Start
-  classes: any;
+  classes?: any;
   history: any;
   // Customizable Area End
 }
@@ -27,7 +27,8 @@ interface S {
   loading: boolean;
   isRegistration: boolean;
   isModalOpen: boolean;
-  profileData: any
+  profileData: any;
+  open: boolean;
   // Customizable Area End
 }
 
@@ -60,6 +61,7 @@ export default class SignInController extends BlockComponent<Props, S, SS> {
       isRegistration: false,
       isModalOpen: false,
       profileData: null,
+      open: false,
     };
 
     // Customizable Area End
@@ -91,7 +93,10 @@ export default class SignInController extends BlockComponent<Props, S, SS> {
         if (!responseJson.errors) {
           this.setState({ status: responseJson });
           localStorage.setItem("LoginToken", responseJson?.meta?.token);
-          this.props.history.push("/");
+          this.setState({ open: true });
+          window.setTimeout(() => {
+            this.props.history.push("/");
+          }, 3000);
         } else {
           this.setState({ isModalOpen: true });
         }
@@ -181,11 +186,20 @@ export default class SignInController extends BlockComponent<Props, S, SS> {
   };
 
   getProfileData = (data: any) => {
-     this.setState({profileData: data})
-     if(data?.access_token.length !== 0) {
+    this.setState({ profileData: data });
+    if (data?.access_token.length !== 0) {
+      this.setState({ open: true });
+      window.setTimeout(() => {
         this.props.history.push("/");
-     }
-  }
-  
+      }, 3000);
+    } else {
+      this.setState({ isModalOpen: true });
+    }
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   // Customizable Area End
 }

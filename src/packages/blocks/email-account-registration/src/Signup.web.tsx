@@ -14,6 +14,9 @@ import {
   Radio,
   FormControlLabel,
   Modal,
+  createStyles,
+  Theme,
+  withStyles,
 } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
@@ -52,7 +55,22 @@ export default class Signup extends SignupController {
         aria-describedby="modal-modal-description"
         data-testid="new_spend_modal"
       >
-        <Box style={webStyle.modalContainer}>
+        <Box
+          style={{
+            background: "#FFFAFA",
+            width: "400px",
+            border: "1px solid black",
+            height: "250px",
+            position: "absolute",
+            top: "30%",
+            left: "30%",
+            borderRadius: "12px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <img
             src={
               this.state.registrationStatus === "success"
@@ -103,36 +121,30 @@ export default class Signup extends SignupController {
       // Customizable Area Start
       // Required for all blocks
       <ThemeProvider theme={theme}>
-        <Box    
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
+        <Box className={this.props.classes?.mainWrapper}>
+          <Box className={this.props.classes?.rightCard}>
+            <img className={this.props.classes?.rightCardImg} src={RightImg} alt="RightImg" />
+          </Box>
           <Box sx={{ width: "100%" }}>
             <Box>
-              <Box width="360px" margin="auto" pt={"147px"}> 
+              <Box className={this.props.classes?.formWrapper}>
                 <Box>
-                  <img
-                    src={Logo}
-                    alt="logo"
-                    style={{ width: "133px", height: "104px" }}
-                  />
-                  <Typography variant="h2" style={webStyle.header}>
+                  <img src={Logo} alt="logo" className={this.props.classes?.logoContent}/>
+                  <Typography variant="h2" className={this.props.classes?.header}>
                     Sign up Adventure Park
                   </Typography>
                 </Box>
                 <Box mt={"24px"}>
-                  <Box style={webStyle.googleAcc}>
-                    <img src={google} alt="google" />
-                    <Typography style={webStyle.googleText}>
+                  <Box className={this.props.classes?.googleAcc}>
+                    <img src={google} alt="google" className={this.props.classes?.iconGoogle} />
+                    <Typography className={this.props.classes?.googleText}>
                       Continue with Google{" "}
                     </Typography>
                   </Box>
                   <Box mt={"34px"} style={{ position: "relative" }} pt={"10px"}>
-                    <Box className="lineHorizontal"></Box>
-                    <Box className="divider">
-                      <Typography style={webStyle.textdivide}>OR</Typography>
+                    <Box className={this.props.classes?.lineHorizontal} />
+                    <Box className={this.props.classes?.divider}>
+                      <Typography className={this.props.classes?.textdivide}>OR</Typography>
                     </Box>
                   </Box>
                 </Box>
@@ -180,13 +192,13 @@ export default class Signup extends SignupController {
                       <Form translate={undefined}>
                         <Grid container spacing={2}>
                           <Grid item xs={6}>
-                            <label style={webStyle.label} htmlFor="firstName">
+                            <label className={this.props.classes?.label} htmlFor="firstName">
                               First Name
                             </label>
 
                             <Field
                               data-test-id="signupInputName"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               type="text"
                               id="firstName"
                               name="firstName"
@@ -198,7 +210,7 @@ export default class Signup extends SignupController {
                               }}
                               fullWidth
                               helperText={
-                                <Typography style={webStyle.required}>
+                                <Typography className={this.props.classes?.required}>
                                   <ErrorMessage name="firstName" />
                                 </Typography>
                               }
@@ -209,7 +221,7 @@ export default class Signup extends SignupController {
                           </Grid>
 
                           <Grid item xs={6}>
-                            <label style={webStyle.label} htmlFor="lastName">
+                            <label className={this.props.classes?.label} htmlFor="lastName">
                               Last Name
                             </label>
 
@@ -217,14 +229,14 @@ export default class Signup extends SignupController {
                               data-test-id="signupInputName"
                               type="text"
                               id="lastName"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               name="lastName"
                               placeholder="Last Name "
                               variant="outlined"
                               as={TextField}
                               fullWidth
                               helperText={
-                                <Typography style={webStyle.required}>
+                                <Typography className={this.props.classes?.required}>
                                   <ErrorMessage name="lastName" />
                                 </Typography>
                               }
@@ -234,21 +246,21 @@ export default class Signup extends SignupController {
                             />
                           </Grid>
                           <Grid item xs={12}>
-                            <label style={webStyle.label} htmlFor="email">
+                            <label className={this.props.classes?.label} htmlFor="email">
                               Email
                             </label>
 
                             <Field
                               data-test-id="signupInputEmail"
                               id="email"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               name="email"
                               placeholder="abc@gmail.com"
                               variant="outlined"
                               as={TextField}
                               fullWidth
                               helperText={
-                                <Typography style={webStyle.required}>
+                                <Typography className={this.props.classes?.required}>
                                   <ErrorMessage name="email" />
                                 </Typography>
                               }
@@ -259,7 +271,7 @@ export default class Signup extends SignupController {
                           </Grid>
 
                           <Grid item xs={12}>
-                            <label style={webStyle.label} htmlFor="password">
+                            <label className={this.props.classes?.label} htmlFor="password">
                               Password
                             </label>
 
@@ -269,47 +281,39 @@ export default class Signup extends SignupController {
                                 this.state.showPassword ? "text" : "password"
                               }
                               id="password"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               name="password"
                               variant="outlined"
                               as={TextField}
                               fullWidth
                               placeholder="**********"
                               helperText={
-                                <Typography style={webStyle.required}>
+                                <Typography className={this.props.classes?.required}>
                                   <ErrorMessage name="password">
                                     {(errorMessage) => (
-                                      <div style={webStyle.errorContainer}>
+                                      <div className={this.props.classes?.errorContainer}>
                                         <div style={{ marginBottom: "5px" }}>
-                                          <span
-                                            style={webStyle.dotColor}
-                                          ></span>
-                                          <span style={webStyle.errorUpdate}>
+                                          <span className={this.props.classes?.dotColor} />
+                                          <span className={this.props.classes?.errorUpdate}>
                                             At least one capital letter
                                           </span>
                                         </div>
                                         <div style={{ marginBottom: "5px" }}>
-                                          <span
-                                            style={webStyle.dotColor}
-                                          ></span>
-                                          <span style={webStyle.errorUpdate}>
+                                          <span className={this.props.classes?.dotColor} />
+                                          <span className={this.props.classes?.errorUpdate}>
                                             At least one lowercase letter
                                           </span>
                                         </div>
                                         <div style={{ marginBottom: "5px" }}>
-                                          <span
-                                            style={webStyle.dotColor}
-                                          ></span>
-                                          <span style={webStyle.errorUpdate}>
+                                          <span className={this.props.classes?.dotColor} />
+                                          <span className={this.props.classes?.errorUpdate}>
                                             Minimum character length is 8
                                             characters
                                           </span>
                                         </div>
                                         <div style={{ marginBottom: "5px" }}>
-                                          <span
-                                            style={webStyle.dotColor}
-                                          ></span>
-                                          <span style={webStyle.errorUpdate}>
+                                          <span className={this.props.classes?.dotColor} />
+                                          <span className={this.props.classes?.errorUpdate}>
                                             Atleast one number
                                           </span>
                                         </div>
@@ -334,19 +338,19 @@ export default class Signup extends SignupController {
                                 ),
                               }}
                             />
-                            <span style={webStyle.description}>
+                            <span className={this.props.classes?.description}>
                               The password must be minimum 8 characters, include
                               at least one capital, one lowercase, one number
                               and one special character.
                             </span>
                           </Grid>
                           <Grid item xs={12}>
-                            <label style={webStyle.label} htmlFor="Cpassword">
+                            <label className={this.props.classes?.label} htmlFor="Cpassword">
                               Confirm Password
                             </label>
                             <Field
                               data-test-id="signupInputCPassword"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               type={
                                 this.state.confirmPassword ? "text" : "password"
                               }
@@ -357,7 +361,7 @@ export default class Signup extends SignupController {
                               as={TextField}
                               fullWidth
                               helperText={
-                                <Typography style={webStyle.required}>
+                                <Typography className={this.props.classes?.required}>
                                   <ErrorMessage name="Cpassword" />
                                 </Typography>
                               }
@@ -382,17 +386,22 @@ export default class Signup extends SignupController {
                           </Grid>
 
                           <Grid item xs={6}>
-                            <label style={webStyle.label} htmlFor="Phone">
+                            <label className={this.props.classes?.label} htmlFor="Phone">
                               Mobile Number
                             </label>
 
                             <Field
                               name="Phone"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               data-test-id="phoneNumber"
-                              style={{ width: "100px", padding: "10px" }}
+                              style={{
+                                width: "100px",
+                                padding: "10px",
+                                background: "red",
+                              }}
                               render={({ field, form }: any) => (
                                 <PhoneInput
+                                  inputStyle={{ width: "100%", height: "56px" }}
                                   {...field}
                                   country="in"
                                   value={values.Phone}
@@ -406,26 +415,26 @@ export default class Signup extends SignupController {
                                     variant: "outlined",
                                     fullWidth: true,
                                     error:
-                                      form?.errors.phone && form?.touched.phone,
+                                      form.errors.phone && form.touched.phone,
                                     helperText:
-                                      form?.errors.phone && form?.touched.phone
-                                        ? form?.errors.phone
+                                      form.errors.phone && form.touched.phone
+                                        ? form.errors.phone
                                         : "",
                                   }}
                                 />
                               )}
                             />
-                            <Typography style={webStyle.required}>
+                            <Typography className={this.props.classes?.required}>
                               <ErrorMessage name="Phone" />
                             </Typography>
                           </Grid>
                           <Grid item xs={6}>
-                            <label style={webStyle.label} htmlFor="date">
+                            <label className={this.props.classes?.label} htmlFor="date">
                               Date of Birth
                             </label>
                             <Field
                               name="date"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               variant="outlined"
                               as={TextField}
                               fullWidth
@@ -442,14 +451,14 @@ export default class Signup extends SignupController {
                           </Grid>
 
                           <Grid item xs={6}>
-                            <label style={webStyle.label} htmlFor="state">
+                            <label className={this.props.classes?.label} htmlFor="state">
                               State
                             </label>
 
                             <Field
                               data-test-id="State"
                               type="text"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               id="state"
                               name="state"
                               placeholder="Delhi"
@@ -457,7 +466,7 @@ export default class Signup extends SignupController {
                               as={TextField}
                               fullWidth
                               helperText={
-                                <Typography style={webStyle.required}>
+                                <Typography className={this.props.classes?.required}>
                                   <ErrorMessage name="state" />
                                 </Typography>
                               }
@@ -468,13 +477,13 @@ export default class Signup extends SignupController {
                           </Grid>
 
                           <Grid item xs={6}>
-                            <label style={webStyle.label} htmlFor="City">
+                            <label className={this.props.classes?.label} htmlFor="City">
                               City
                             </label>
 
                             <Field
                               data-test-id="City"
-                              className="textfield"
+                              className={this.props.classes?.inputFelid}
                               type="text"
                               id="City"
                               name="City"
@@ -483,7 +492,7 @@ export default class Signup extends SignupController {
                               as={TextField}
                               fullWidth
                               helperText={
-                                <Typography style={webStyle.required}>
+                                <Typography className={this.props.classes?.required}>
                                   <ErrorMessage name="City" />
                                 </Typography>
                               }
@@ -501,13 +510,13 @@ export default class Signup extends SignupController {
                                 alignItems: "center",
                               }}
                             >
-                              <label style={webStyle.label} htmlFor="Gender">
+                              <label className={this.props.classes?.label} htmlFor="Gender">
                                 Gender
                               </label>
                               <Field name="Gender" data-test-id="Gender">
                                 {() => (
                                   <RadioGroup
-                                    className="radioButtons"
+                                    className={this.props.classes?.radioButtons}
                                     name="Gender"
                                     value={values.Gender}
                                     onChange={handleChange}
@@ -537,13 +546,13 @@ export default class Signup extends SignupController {
 
                           <Grid item>
                             <Box>
-                              <label style={webStyle.label}>
+                              <label className={this.props.classes?.label}>
                                 Profile Photo
                               </label>
-                              <Box style={webStyle.imgBlock}>
+                              <Box className={this.props.classes?.imgBlock}>
                                 <Box>
                                   {this.state.imageprofile === "" ? (
-                                    <Box style={webStyle.iconstyle}>
+                                    <Box className={this.props.classes?.iconstyle}>
                                       <Typography
                                         style={{
                                           color: "white",
@@ -568,15 +577,9 @@ export default class Signup extends SignupController {
                                 </Box>
                                 <Button
                                   component="label"
-                                  style={webStyle.uploadbtn}
+                                  className={this.props.classes?.uploadbtn}
                                 >
-                                  <div
-                                    style={{
-                                      position: "absolute",
-                                      width: "120px",
-                                      height: "120px",
-                                    }}
-                                  >
+                                  <div className={this.props.classes?.uploadImg}>
                                     <input
                                       type="file"
                                       data-test-id="uploadImage"
@@ -598,12 +601,12 @@ export default class Signup extends SignupController {
                               <Button
                                 data-test-id="buttonSubmit"
                                 type="submit"
-                                style={webStyle.signbtn}
+                                className={this.props.classes?.signbtn}
                                 size="large"
                               >
                                 Sign up
                               </Button>
-                              <Typography style={webStyle.accountLink}>
+                              <Typography className={this.props.classes?.accountLink}>
                                 Already have an account?{" "}
                                 <Link
                                   href="/LogIn"
@@ -626,9 +629,6 @@ export default class Signup extends SignupController {
               </Box>
             </Box>
           </Box>
-          <Box style={webStyle.rightCard}>
-            <img className="rightCardImg" src={RightImg} alt="RightImg" />
-          </Box>
           {this.renderSignUpFailed()}
         </Box>
       </ThemeProvider>
@@ -638,167 +638,295 @@ export default class Signup extends SignupController {
 }
 
 // Customizable Area Start
-const webStyle = {
-  rightCard: {
-    height: "100%",
-    width: "100%",
-  },
-  header: {
-    marginTop: "24px",
-    lineHeight: "2",
-    fontSize: "20px",
-    fontWeight: "bold",
-    fontFamily: "Montserrat,sans-serif",
-    color: "#0F172A",
-    letterSpacing: "-0.12px",
-    width: "248px",
-  } as React.CSSProperties,
-  rightCardImg: {
-    width: "100%",
-  },
-  errorUpdate: {
-    marginBottom: "10px",
-    color: "#FF3131",
-    fontFamily: "Montserrat",
-    fontSize: "14px",
-    fontStyle: "normal",
-    fontWeight: 400,
-    lineHeight: "24px",
-  },
-  dotColor: {
-    height: "5px",
-    width: "5px",
-    backgroundColor: "red",
-    borderRadius: "50%",
-    display: "inline-block",
-    margin: "0px 8px 2px 0px",
-  },
-  textdivide: {
-    fontSize: "14px",
-    fontWeight: "bold",
-    fontFamily: "Montserrat,sans-serif",
-    color: "#64748B",
-    textAlign: "center",
-    width: "23px",
-    margin: "0 20px",
-  },
-  googleText: {
-    fontFamily: "Montserrat,sans-serif",
-    fontSize: "16px",
-    color: "#0F172A",
-    fontWeight: 600,
-  },
-  googleAcc: {
-    border: "1px solid grey",
-    padding: "10px",
-    height: "56px",
-    borderRadius: "8px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "10px",
-  },
-  errorContainer: {
-    margin: "0px 0px 0px -10px",
-  },
-  imgBlock: {
-    border: "1px solid grey",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    textAlign: "center",
-    borderRadius: "5px",
-    width: "120px",
-    height: "120px",
-  } as React.CSSProperties,
 
-  modalContainer: {
-    background: "#FFFAFA",
-    width: "400px",
-    border: "1px solid black",
-    height: "250px",
-    position: "absolute",
-    top: "30%",
-    left: "30%",
-    borderRadius: "12px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  } as React.CSSProperties,
+const styles = (theme: Theme) =>
+  createStyles({
+    rightCard: {
+      height: "100%",
+      width: "100%",
+    },
+    divider: {
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: "40%",
+      background: "#fff",
+      width: "60px",
+    },
+    lineHorizontal: {
+      borderTop: "1px solid #e2e8f0",
+    },
+    radioButtons: {
+      '& .MuiSvgIcon-root': {
+        width: "12px !important",
+        height: "12px !important",
+      },
+      '& .Mui-checked svg:nth-child(2)': {
+        transform: "scale(2) !important",
+        width: "100px",
+      },
+    },
+    mainWrapper: {
+      display: "flex",
+      flexDirection: "row-reverse",
+    },
+    formWrapper: {
+     width: "360px",
+     margin: "auto",
+     paddingTop: "147px",
+    },
+    logoContent: {
+      width: "133px", height: "104px"
+    },
+    header: {
+      marginTop: "24px",
+      lineHeight: "2",
+      fontSize: "20px",
+      fontWeight: "bold",
+      fontFamily: "Montserrat,sans-serif",
+      color: "#0F172A",
+      letterSpacing: "-0.12px",
+      width: "248px",
+    },
+    rightCardImg: {
+      width: "100%",
+      height: "120rem",
+    },
+    errorUpdate: {
+      marginBottom: "10px",
+      color: "#FF3131",
+      fontFamily: "Montserrat",
+      fontSize: "14px",
+      fontStyle: "normal",
+      fontWeight: 400,
+      lineHeight: "24px",
+    },
+    dotColor: {
+      height: "5px",
+      width: "5px",
+      backgroundColor: "red",
+      borderRadius: "50%",
+      display: "inline-block",
+      margin: "0px 8px 2px 0px",
+    },
+    textdivide: {
+      fontSize: "14px",
+      fontWeight: "bold",
+      fontFamily: "Montserrat,sans-serif",
+      color: "#64748B",
+      textAlign: "center",
+      width: "23px",
+      margin: "0 20px",
+    },
+    googleText: {
+      fontFamily: "Montserrat,sans-serif",
+      fontSize: "16px",
+      color: "#0F172A",
+      fontWeight: 600,
+    },
+    googleAcc: {
+      border: "1px solid grey",
+      padding: "10px",
+      height: "56px",
+      borderRadius: "8px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "10px",
+    },
+    errorContainer: {
+      margin: "0px 0px 0px -10px",
+    },
+    imgBlock: {
+      border: "1px solid grey",
+      display: "flex",
+      justifyContent: "center",
+      flexDirection: "column",
+      textAlign: "center",
+      borderRadius: "5px",
+      width: "120px",
+      height: "120px",
+    } as React.CSSProperties,
 
-  accountLink: {
-    textAlign: "left",
-    color: "#0F172A",
-    fontSize: "16px",
-    lineHeight: "30px",
-    fontFamily: "Montserrat,sans-serif",
-  } as React.CSSProperties,
+    modalContainer: {
+      background: "#FFFAFA",
+      width: "400px",
+      border: "1px solid black",
+      height: "250px",
+      position: "absolute",
+      top: "30%",
+      left: "30%",
+      borderRadius: "12px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    } as React.CSSProperties,
 
-  Loginblock: {
-    display: "flex",
-    flexDirection: "column",
-    position: "relative",
-  } as React.CSSProperties,
-  signbtn: {
-    background: "#2B65EC",
-    borderRadius: "10px",
-    width: "100%",
-    height: "56px",
-    color: "#fff",
-    fontFamily: "Montserrat,sans-serif",
-    fontStyle: "normal",
-    fontWeight: 600,
-    fontSize: "18px",
-    textTransform: "none",
-    margin: "32px auto 32px auto",
-  } as React.CSSProperties,
+    accountLink: {
+      textAlign: "left",
+      color: "#0F172A",
+      fontSize: "16px",
+      lineHeight: "30px",
+      fontFamily: "Montserrat,sans-serif",
+    } as React.CSSProperties,
 
-  label: {
-    fontStyle: "normal",
-    fontWeight: 700,
-    fontSize: "16px",
-    marginBottom: "10px",
-    fontFamily: "Montserrat, sans-serif",
-    color: "#334155",
-  } as React.CSSProperties,
-  iconstyle: {
-    borderRadius: "2px",
-    background: "#999999",
-    width: "20px",
-    height: "20px",
-    margin: "auto",
-  },
-  uploadbtn: {
-    background: "transparent",
-    fontFamily: "Montserrat,sans-serif",
-    fontSize: "12px",
-    color: "#666666",
-    fontStyle: "normal",
-    textTransform: "capitalize",
-    position: "relative",
-  } as React.CSSProperties,
+    Loginblock: {
+      display: "flex",
+      flexDirection: "column",
+      position: "relative",
+    } as React.CSSProperties,
+    signbtn: {
+      background: "#2B65EC",
+      borderRadius: "10px",
+      width: "100%",
+      height: "56px",
+      color: "#fff",
+      fontFamily: "Montserrat,sans-serif",
+      fontStyle: "normal",
+      fontWeight: 600,
+      fontSize: "18px",
+      textTransform: "none",
+      margin: "32px auto 32px auto",
+    } as React.CSSProperties,
 
-  required: {
-    color: "red",
-    marginTop: "10px",
-    fontSize: "11px",
-    fontFamily: "Montserrat,sans-serif",
-  } as React.CSSProperties,
+    label: {
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontSize: "16px",
+      marginBottom: "10px",
+      fontFamily: "Montserrat, sans-serif",
+      color: "#334155",
+    } as React.CSSProperties,
+    iconstyle: {
+      borderRadius: "2px",
+      background: "#999999",
+      width: "20px",
+      height: "20px",
+      margin: "auto",
+    },
+    uploadbtn: {
+      background: "transparent",
+      fontFamily: "Montserrat,sans-serif",
+      fontSize: "12px",
+      color: "#666666",
+      fontStyle: "normal",
+      textTransform: "capitalize",
+      position: "relative",
+    } as React.CSSProperties,
 
-  title: {
-    lineHeight: "2",
-    fontSize: "36px",
-    fontFamily: "Montserrat,sans-serif",
-    color: "#323548",
-    fontWeight: 700,
-  },
-  description: {
-    color: "#64748B",
-    fontWeight: 400,
-    fontSize: "11px",
-    fontFamily: "Montserrat",
-    marginTop: "10px",
-  },
-};
+    required: {
+      color: "red",
+      marginTop: "10px",
+      fontSize: "11px",
+      fontFamily: "Montserrat,sans-serif",
+    } as React.CSSProperties,
+
+    title: {
+      lineHeight: "2",
+      fontSize: "36px",
+      fontFamily: "Montserrat,sans-serif",
+      color: "#323548",
+      fontWeight: 700,
+    },
+    description: {
+      color: "#64748B",
+      fontWeight: 400,
+      fontSize: "11px",
+      fontFamily: "Montserrat",
+      marginTop: "10px",
+    },
+    uploadImg: {
+      position: "absolute",
+      width: "120px",
+      height: "120px",
+    },
+    "@media (max-width: 750px)": {
+      mainWrapper: {
+        flexDirection: "column",
+      },
+      rightCard: {
+        background:
+          "linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgb(255 255 255 / 99%) 88%)",
+      },
+      formWrapper: {
+        margin: "-410px auto 0 auto",
+        paddingTop: 0,
+       },
+       logoContent: {
+        width: "120px",
+        height: "94px",
+        display: "flex",
+        margin: "0 auto",
+       },
+       header: {
+        width: "100%",
+        textAlign: "center",
+        fontSize: "18px",
+      },  
+      rightCardImg: {
+        position: "relative",
+        zIndex: -1,
+        display: "block",
+        height: "40rem"
+      },
+      googleAcc: {
+        background: "#FFFFFF",
+      },
+      divider: {
+        background: "initial"
+      },
+    },
+    "@media (max-width: 400px)": {
+      formWrapper: {
+        width: "324px"
+       },
+       googleAcc: {
+        height: "50.4px"
+      },
+      iconGoogle: {
+        height: "21.6px",
+        width: "21.6px",
+      },
+      label: {
+        fontSize: "14.4px",
+      },
+      googleText: {
+        fontSize: "14.4px",
+      },
+      inputFelid: {
+        '& .MuiOutlinedInput-root': {
+          height: "50px !important"
+        },
+      },
+      uploadImg: {
+        position: "absolute",
+        width: "108px",
+        height: "108px",
+      },  
+      imgBlock: {
+        width: "108px",
+        height: "108px",
+      },
+      uploadbtn: {
+        fontSize: "10.8px",
+      },
+      accountLink: {
+        fontSize: "14.4px",
+      },
+      signbtn: {
+        height: "50.4px",
+        fontSize: "14.4px",
+      },
+    },
+    "@media (max-width: 341px)": {
+      formWrapper: {
+        width: "280px",
+      },
+    },
+  });
+
+const SignUpWithStyle = withStyles(styles)(Signup);
+export { SignUpWithStyle };
+
 // Customizable Area End

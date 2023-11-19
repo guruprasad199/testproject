@@ -33,7 +33,8 @@ const SignIn = lazy(() =>
 );
 import { AdventureActivityWithStyle } from '../../blocks/settings2/src/Settings2.web';
 import { CategoriessubcategoriesWithStyle } from '../../blocks/categoriessubcategories/src/Categoriessubcategories.web'
-
+import { LoginWebWithStyle } from '../../blocks/email-account-login/src/LogIn.web';
+import { SignUpWithStyle } from '../../blocks/email-account-registration/src/Signup.web';
 // /* Routes List End /
 
 // /* Private Routes start /
@@ -56,8 +57,8 @@ function WebRoutes(rootProps: any) {
           exact
           render={props => <RefundPolicy {...props} />}
         />
-        <Route path="/Signup" exact render={props => <Signup {...props} />} />
-        <Route path="/LogIn" exact render={props => <SignIn {...props} />} />
+        <Route path="/Signup" exact render={props => <SignUpWithStyle {...props} />} />
+        <Route path="/LogIn" exact render={props => <LoginWebWithStyle {...props} />} />
         <Route
           path="/ForgotPassword"
           exact
