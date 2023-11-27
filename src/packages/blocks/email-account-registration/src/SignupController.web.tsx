@@ -197,14 +197,9 @@ export default class SignupController extends BlockComponent<
           window.setTimeout(() => {
             this.props.history?.push("/");
           }, 3000);
-        } else {
-          this.setState({ signUpOpen: false });
         }
       };
 
-      closeHandle = () => {
-        this.setState({ signUpOpen: false });
-      };
     // Customizable Area End
 
 

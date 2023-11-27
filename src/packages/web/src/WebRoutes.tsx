@@ -24,7 +24,7 @@ import { RolesandpermissionsWithStyle } from '../../blocks/rolesandpermissions/s
 import { FoodOutletWithStyle } from '../../blocks/rolesandpermissions/src/FoodOutlet.web';
 import { AboutUsWithStyle } from '../../blocks/contentmanagement/src/AboutUs.web';
 import { OpeningTimesWithStyle } from '../../blocks/rolesandpermissions/src/OpeningTimes.web';
-import { ParkMapWithStyle } from '../../blocks/rolesandpermissions/src/ParkMap.web'
+import { ParkMapWithStyle } from '../../blocks/rolesandpermissions/src/ParkMap.web';
 const Signup = lazy(() =>
   import('../../blocks/email-account-registration/src/Signup.web')
 );
@@ -32,9 +32,10 @@ const SignIn = lazy(() =>
   import('../../blocks/email-account-login/src/LogIn.web')
 );
 import { AdventureActivityWithStyle } from '../../blocks/settings2/src/Settings2.web';
-import { CategoriessubcategoriesWithStyle } from '../../blocks/categoriessubcategories/src/Categoriessubcategories.web'
+import { CategoriessubcategoriesWithStyle } from '../../blocks/categoriessubcategories/src/Categoriessubcategories.web';
 import { LoginWebWithStyle } from '../../blocks/email-account-login/src/LogIn.web';
 import { SignUpWithStyle } from '../../blocks/email-account-registration/src/Signup.web';
+import { TicketsystemWithStyle } from '../../blocks/ticketsystem2/src/Ticketsystem2.web';
 // /* Routes List End /
 
 // /* Private Routes start /
@@ -57,8 +58,16 @@ function WebRoutes(rootProps: any) {
           exact
           render={props => <RefundPolicy {...props} />}
         />
-        <Route path="/Signup" exact render={props => <SignUpWithStyle {...props} />} />
-        <Route path="/LogIn" exact render={props => <LoginWebWithStyle {...props} />} />
+        <Route
+          path="/Signup"
+          exact
+          render={props => <SignUpWithStyle {...props} />}
+        />
+        <Route
+          path="/LogIn"
+          exact
+          render={props => <LoginWebWithStyle {...props} />}
+        />
         <Route
           path="/ForgotPassword"
           exact
@@ -100,9 +109,15 @@ function WebRoutes(rootProps: any) {
           render={props => <AdventureActivityWithStyle {...props} />}
         />
         <Route
-        path="/Annualpass"
-        exact
-        render={props => <CategoriessubcategoriesWithStyle {...props}/>}/>
+          path="/Annualpass"
+          exact
+          render={props => <CategoriessubcategoriesWithStyle {...props} />}
+        />
+        <Route
+          path="/DayPass"
+          exact
+          render={props => <TicketsystemWithStyle {...props} />}
+        />
       </Switch>
     </Suspense>
   );

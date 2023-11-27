@@ -8,6 +8,7 @@ import { runEngine } from "../../../framework/src/RunEngine";
 
 // Customizable Area Start
 import { imgPasswordInVisible, imgPasswordVisible } from "./assets";
+
 // Customizable Area End
 
 export const configJSON = require("./config");
@@ -16,6 +17,7 @@ export interface Props {
   navigation: any;
   id: string;
   // Customizable Area Start
+  classes?: any;
   // Customizable Area End
 }
 
@@ -24,6 +26,7 @@ interface S {
   txtSavedValue: string;
   enableField: boolean;
   // Customizable Area Start
+  EntryTicketData: any;
   // Customizable Area End
 }
 
@@ -39,6 +42,7 @@ export default class Ticketsystem2Controller extends BlockComponent<
   SS
 > {
   // Customizable Area Start
+  getEntryListData: string = "";
   // Customizable Area End
 
   constructor(props: Props) {
@@ -49,6 +53,9 @@ export default class Ticketsystem2Controller extends BlockComponent<
     this.subScribedMessages = [
       getName(MessageEnum.AccoutLoginSuccess),
       // Customizable Area Start
+      getName(MessageEnum.RestAPIResponceMessage),
+      getName(MessageEnum.RestAPIResponceDataMessage),
+      getName(MessageEnum.RestAPIResponceSuccessMessage),
       // Customizable Area End
     ];
 
@@ -57,6 +64,7 @@ export default class Ticketsystem2Controller extends BlockComponent<
       txtSavedValue: "A",
       enableField: false,
       // Customizable Area Start
+      EntryTicketData: [],
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -80,6 +88,21 @@ export default class Ticketsystem2Controller extends BlockComponent<
     }
 
     // Customizable Area Start
+    if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
+      const apiRequestCallId = message.getData(
+        getName(MessageEnum.RestAPIResponceDataMessage)
+      );
+      let responseJson = message.getData(
+        getName(MessageEnum.RestAPIResponceSuccessMessage)
+      );
+
+      if (apiRequestCallId === this.getEntryListData) {
+        if (responseJson) {
+          this.setState({ EntryTicketData: responseJson.data });
+        }
+      }
+    }
+
     // Customizable Area End
   }
 
@@ -139,5 +162,34 @@ export default class Ticketsystem2Controller extends BlockComponent<
   };
 
   // Customizable Area Start
+  async componentDidMount() {
+    this.getTicketData();
+  }
+
+  getTicketData = () => {
+    const header = {
+      "Content-Type": configJSON.validationApiContentType,
+    };
+    const requestMessage = new Message(
+      getName(MessageEnum.RestAPIRequestMessage)
+    );
+    this.getEntryListData = requestMessage.messageId;
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIResponceEndPointMessage),
+      configJSON.entryTicketEndPoint
+    );
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestHeaderMessage),
+      JSON.stringify(header)
+    );
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestMethodMessage),
+      configJSON.validationApiMethodType
+    );
+
+    runEngine.sendMessage(requestMessage.id, requestMessage);
+  };
+
   // Customizable Area End
 }

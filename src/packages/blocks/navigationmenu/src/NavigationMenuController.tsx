@@ -18,6 +18,7 @@ export interface Props {
   id: string;
   // Customizable Area Start
   drawerContent?: boolean;
+  classes?: any;
   // Customizable Area End
 }
 
@@ -26,6 +27,10 @@ interface S {
   webDrawer: boolean;
   token: any;
   drawerItems: any;
+  emailValue: string;
+  isSuccessMessage: boolean;
+  isValidEmail: boolean;
+  errorMessage: string;
   // Customizable Area End
 }
 
@@ -42,6 +47,7 @@ export default class NavigationMenuController extends BlockComponent<
 > {
   // Customizable Area Start
   apiGetDataCallId: string = "";
+  apiPostEmailSub: string = "";
   // Customizable Area End
 
   constructor(props: Props) {
@@ -62,6 +68,10 @@ export default class NavigationMenuController extends BlockComponent<
       webDrawer: false,
       token: "",
       drawerItems: [],
+      emailValue: "",
+      isSuccessMessage: false,
+      isValidEmail: false,
+      errorMessage: "",
       // Customizable Area End
     };
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -73,111 +83,90 @@ export default class NavigationMenuController extends BlockComponent<
   async receive(from: string, message: Message) {
     runEngine.debugLog("Message Recived", message);
     // Customizable Area Start
-    if (getName(MessageEnum.SessionResponseMessage) === message.id) {
-      let token = message.getData(getName(MessageEnum.SessionResponseToken));
-      runEngine.debugLog("TOKEN", token);
-      this.setState({ token: token }, () => {
-        this.getMenuItems();
-      });
-    } else if (
-      getName(MessageEnum.RestAPIResponceMessage) === message.id &&
-      this.apiGetDataCallId !== "" &&
-      this.apiGetDataCallId ===
-        message.getData(getName(MessageEnum.RestAPIResponceDataMessage))
-    ) {
-      var responseJson = message.getData(
+    if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
+      const apiRequestCallId = message.getData(
+        getName(MessageEnum.RestAPIResponceDataMessage)
+      );
+      let responseJson = message.getData(
         getName(MessageEnum.RestAPIResponceSuccessMessage)
       );
-      if (responseJson) {
-        this.setState({ drawerItems: responseJson });
-      } else {
-        this.parseApiErrorResponse(responseJson);
+
+      if (apiRequestCallId === this.apiPostEmailSub) {
+        if (responseJson) {
+          this.setState({ isSuccessMessage: true });
+        }
       }
     }
     // Customizable Area End
   }
 
   // Customizable Area Start
-  toggleDrawer = (event: any) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    this.setState({ webDrawer: !this.state.webDrawer });
-  };
-
-  onPressMenuItem = (menuItem: any) => {
-    let path = menuItem.url;
-
-    var tarea_regex = /^(http|https)/;
-    if (tarea_regex.test(String(path).toLowerCase())) {
-      if (this.isPlatformWeb()) {
-        window.open(path);
-      } else {
-        Linking.openURL(path);
-      }
-    } else {
-      const msg: Message = new Message(getName(MessageEnum.NavigationMessage));
-      msg.addData(getName(MessageEnum.NavigationTargetMessage), path);
-      msg.addData(getName(MessageEnum.NavigationPropsMessage), this.props);
-      this.send(msg);
-    }
-  };
-
   userProfileProps = {
     source: userProfile,
   };
 
-  async componentDidMount() {
-    super.componentDidMount();
-    this.getToken();
-    if (this.isPlatformWeb() === false) {
-      this.props.navigation.addListener("willFocus", () => {
-        this.getToken();
-      });
-    }
-  }
-
-  getToken = () => {
-    const msg: Message = new Message(
-      getName(MessageEnum.SessionRequestMessage)
-    );
-    this.send(msg);
-  };
-
-  getMenuItems = async () => {
-    let token = this.state.token;
-
-    const header = {
-      "Content-Type": configJSON.jsonApiContentType,
-      token: token,
+  subscribeEmail = () => {
+    const today = new Date().toISOString().split('T')[0];
+    let data = {
+      data: {
+        email: this.state.emailValue,
+        subscribed_date: today,
+      },
     };
 
+    const header = {
+      "Content-Type": configJSON.validationApiContentType,
+    };
     const requestMessage = new Message(
       getName(MessageEnum.RestAPIRequestMessage)
     );
 
-    this.apiGetDataCallId = requestMessage.messageId;
+    this.apiPostEmailSub = requestMessage.messageId;
 
     requestMessage.addData(
       getName(MessageEnum.RestAPIResponceEndPointMessage),
-      configJSON.getMenuItemsEndPoint
+      configJSON.postEmailSubscription
     );
-
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestHeaderMessage),
       JSON.stringify(header)
     );
-
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestBodyMessage),
+      JSON.stringify(data)
+    );
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestMethodMessage),
-      configJSON.getApiMethodType
+      configJSON.httpPostType
     );
-
     runEngine.sendMessage(requestMessage.id, requestMessage);
     return true;
+  };
+
+  onValueChange = (value: string) => {
+    const inputEmail = value;
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const isValid = emailRegex.test(inputEmail) && inputEmail !== "";
+    this.setState({
+      isValidEmail: isValid,
+      emailValue: value,
+      errorMessage: isValid
+        ? ""
+        : inputEmail === ""
+        ? "Please enter an email"
+        : "Enter a valid email",
+    });
+  };
+
+  modalClose = () => {
+    this.setState({ isSuccessMessage: false });
+  };
+
+  handleEmailSubmit = (event: any) => {
+    if (this.state.isValidEmail) {
+      this.subscribeEmail();
+      this.setState({ emailValue: "" });
+    }
   };
 
   // Customizable Area End

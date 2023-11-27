@@ -118,7 +118,7 @@ export default class SignIn extends SignInController {
           <img className={this.props.classes?.rightCardImg} src={RightImg} alt="RightImg" />
           <div />
         </Box>
-        <Box sx={{ width: "100%" }}>
+        <Box className={this.props.classes?.wrapWithBackground}>
           <Box className={this.props.classes?.mainContainer}>
             <Box className={this.props.classes?.logoContainer}>
               <img src={Logo} alt="logo" className={this.props.classes?.imgLogo} />
@@ -355,6 +355,7 @@ const styles = (theme: Theme) =>
   createStyles({
     mainWrapper: {
       display: "flex",
+      height: "auto !important",
       flexDirection: "row-reverse",
     },
     rightCard: {
@@ -521,6 +522,9 @@ const styles = (theme: Theme) =>
       width: "360px",
       margin: "147px auto 0px auto",
     },
+    wrapWithBackground: {
+      width: "100%"
+    },
     agreeText: {
       fontSize: "14px",
       color: "#0F172A",
@@ -545,11 +549,15 @@ const styles = (theme: Theme) =>
     },
     "@media (max-width: 750px)": {
       mainWrapper: {
+        display: "grid",
         flexDirection: "column",
+      },
+      wrapWithBackground: {
+       background: "#FFFFFF",
       },
       rightCard: {
         background:
-          "linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgb(255 255 255 / 99%) 88%)",
+          "linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgb(255 255 255 / 99%) 75%)",
       },
       rightCardImg: {
         position: "relative",

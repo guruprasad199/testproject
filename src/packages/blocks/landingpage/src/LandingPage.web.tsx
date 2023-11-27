@@ -8,7 +8,7 @@ import KidsCombo from "./KIdscombo.web";
 import AdultsCombo from "./AdultsCombo.web";
 import  ImageGrid from "./ImageGrid.web";
 import  AdventurePass from "./AdventurePass.web";
-import Footer from "../../../components/src/Footer/Footer.web";
+import { Footer } from "../../navigationmenu/src/NavigationMenu.web";
 import  Testimonial  from "./Testimonial.web";
 // Customizable Area End
 
@@ -29,7 +29,7 @@ export default class LandingPage extends LandingPageController {
         <ImageGrid/>
         <AdventurePass />
         <Testimonial/> 
-        <Footer /> 
+        <Footer navigation={undefined} id={""} /> 
       </div>
     );
   }

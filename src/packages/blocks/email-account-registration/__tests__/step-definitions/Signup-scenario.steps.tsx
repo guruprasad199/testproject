@@ -35,6 +35,19 @@ const respError = {
   ],
 };
 
+const signupDummyData = {
+  access_token:
+    "ya29.a0AfB_byAR_OEroarokXBBfWxWTGak4OU9QCalqTDVUcXYT4hWv3ShsQ5lM31SVUfkvpzOAa-YED3ivcsRPxqnwFjctkWut7RVy3nlC6CzEXmlxDD6WFj_l_FaLqJkdoxMMkISIPnVVyoxl5TnPRzrjQTK9geOXjOELH8aCgYKAVASAQ8SFQGOcNnCP74dppJU2tFLKhQEuXPZCw0170",
+  authuser: "0",
+  email: "test@deqode.com",
+  email_verified: true,
+  expires_in: 3599,
+  family_name: "family",
+  given_name: "test user",
+  hd: "google.com",
+};
+
+
 const emailLogin = {
   data: {
     data: {
@@ -104,6 +117,10 @@ Object.defineProperty(global, "window", {
       removeItem: jest.fn(),
       clear: jest.fn(),
     },
+    setTimeout: jest.fn((cb: string | Function, time?: number) => {typeof cb == "function"? cb() : null}),
+    history: {
+      push: jest.fn()
+    }
   },
 });
 
@@ -143,6 +160,7 @@ defineFeature(feature, (test) => {
     when("I navigate to the Signup Screen", () => {
       instance = mobileAccountLogInWrapper.instance() as Signup;
       instance.modalClose();
+      instance.getSignupData(signupDummyData)
       instance.setState({ registrationStatus: "success", showPassword: true });
     });
 

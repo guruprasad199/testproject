@@ -12,7 +12,7 @@ export interface Props {
   navigation: any;
   id: string;
   // Customizable Area Start
-  classes?: any
+  classes?: any;
   // Customizable Area End
 }
 
@@ -26,6 +26,7 @@ interface S {
   dropdownCategoryStatus: boolean;
   activeModalType: string;
   selectedCategoryID: any;
+  annualCardContainer: any;
   // Customizable Area End
 }
 
@@ -43,6 +44,9 @@ export default class CategoriessubcategoriesController extends BlockComponent<
   deleteSubCategoriesApiCallId: any;
   addCategoryApiCallId: any;
   addSubCategoryApiCallId: any;
+  // Customizable Area Start
+  allAnnualCardsCallId: any;
+  // Customizable Area End
   constructor(props: Props) {
     super(props);
     this.receive = this.receive.bind(this);
@@ -50,7 +54,9 @@ export default class CategoriessubcategoriesController extends BlockComponent<
     // Customizable Area Start
     this.subScribedMessages = [
       getName(MessageEnum.SessionResponseMessage),
-      getName(MessageEnum.RestAPIResponceMessage)
+      getName(MessageEnum.RestAPIResponceMessage),
+      getName(MessageEnum.RestAPIResponceDataMessage),
+      getName(MessageEnum.RestAPIResponceSuccessMessage)
     ];
 
     this.state = {
@@ -61,7 +67,8 @@ export default class CategoriessubcategoriesController extends BlockComponent<
       isVisible: false,
       dropdownCategoryStatus: false,
       activeModalType: "",
-      selectedCategoryID: []
+      selectedCategoryID: [],
+      annualCardContainer: []
     };
     // Customizable Area End
     runEngine.attachBuildingBlock(this as IBlock, this.subScribedMessages);
@@ -75,8 +82,11 @@ export default class CategoriessubcategoriesController extends BlockComponent<
         this.getToken();
       });
     }
+    // Customizable Area Start
+    this.getAnnualCardDetail();
+    // Customizable Area End
   }
-  
+
   getToken = () => {
     const msg: Message = new Message(
       getName(MessageEnum.SessionRequestMessage)
@@ -93,7 +103,6 @@ export default class CategoriessubcategoriesController extends BlockComponent<
       this.setState({ token: token }, () => {
         this.getCategories();
       });
-
     } else if (getName(MessageEnum.RestAPIResponceMessage) === message.id) {
       const apiRequestCallId = message.getData(
         getName(MessageEnum.RestAPIResponceDataMessage)
@@ -106,20 +115,28 @@ export default class CategoriessubcategoriesController extends BlockComponent<
       var errorReponse = message.getData(
         getName(MessageEnum.RestAPIResponceErrorMessage)
       );
+
       runEngine.debugLog("API Message Recived", message);
-      if (responseJson.data) {
-        if (apiRequestCallId === this.getCategoriesApiCallId) {
+      switch (apiRequestCallId) {
+        case this.allAnnualCardsCallId:
+          if (responseJson) {
+            this.setState({ annualCardContainer: responseJson.data });
+          }
+          break;
+        case this.getCategoriesApiCallId:
           let array = responseJson.data;
           for (let i = 0; i < array.length; i++) {
             array[i].expand = false;
             array[i].Check = false;
           }
           this.setState({ categoriesArray: array });
-        } else if (apiRequestCallId === this.addCategoryApiCallId) {
+          break;
+        case this.addCategoryApiCallId:
           this.setState({ isVisible: false, category: "" }, () => {
             this.getCategories();
           });
-        } else if (apiRequestCallId === this.addSubCategoryApiCallId) {
+          break;
+        case this.addSubCategoryApiCallId:
           this.setState(
             {
               isVisible: false,
@@ -131,29 +148,12 @@ export default class CategoriessubcategoriesController extends BlockComponent<
               this.getCategories();
             }
           );
-        }
-        //this.setState({ isVisible: false });
-      } else if (
-        apiRequestCallId === this.deleteCategoriesApiCallId && !responseJson.error
-      ) {
-        this.getCategories();
-      } 
-      else if( apiRequestCallId === this.deleteCategoriesApiCallId && responseJson.error){
-        this.parseApiCatchErrorResponse(responseJson.error.message);
-      }
-      else if (
-        apiRequestCallId === this.deleteSubCategoriesApiCallId && !responseJson.error
-      ) {
-        this.getCategories();
-      } 
-      else if (
-        apiRequestCallId === this.deleteSubCategoriesApiCallId && responseJson.error
-      ) {
-        this.parseApiCatchErrorResponse(responseJson.error.message);
-      }
-      else if (responseJson.errors) {
-        this.parseApiErrorResponse(responseJson);
-        this.parseApiCatchErrorResponse(errorReponse);
+          break;
+        default:
+          if (responseJson.error) {
+            this.parseApiErrorResponse(responseJson);
+            this.parseApiCatchErrorResponse(errorReponse);
+          }
       }
     }
     // Customizable Area End
@@ -354,11 +354,10 @@ export default class CategoriessubcategoriesController extends BlockComponent<
   };
 
   getCategories = () => {
-
     if (!this.state.token) {
       return;
     }
-    
+
     const header = {
       "Content-Type": configJSON.categoryApiContentType,
       token: this.state.token
@@ -384,6 +383,34 @@ export default class CategoriessubcategoriesController extends BlockComponent<
     );
 
     runEngine.sendMessage(requestMessage.id, requestMessage);
+  };
+
+  getAnnualCardDetail = () => {
+    const header = {
+      "Content-Type": configJSON.categoryApiContentType
+    };
+    const requestMessage = new Message(
+      getName(MessageEnum.RestAPIRequestMessage)
+    );
+
+    this.allAnnualCardsCallId = requestMessage.messageId;
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIResponceEndPointMessage),
+      configJSON.endPointForAnnualPass
+    );
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestHeaderMessage),
+      JSON.stringify(header)
+    );
+
+    requestMessage.addData(
+      getName(MessageEnum.RestAPIRequestMethodMessage),
+      configJSON.httpGetType
+    );
+
+    runEngine.sendMessage(requestMessage.id, requestMessage);
+    return true;
   };
 
   // Customizable Area End

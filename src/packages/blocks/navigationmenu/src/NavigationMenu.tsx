@@ -65,7 +65,6 @@ export default class NavigationMenu extends NavigationMenuController {
                             <TouchableOpacity
                               key={mItem?.id?.toString()}
                               style={styles.drawerItem}
-                              onPress={() => this.onPressMenuItem(mItem)}
                             >
                               {/* <Image source={item.icon} style={styles.drawerItemIcon} /> */}
                               <Text style={styles.drawerItemTitle}>

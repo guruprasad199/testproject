@@ -13,4 +13,5 @@ exports.labelTitleText = "ticketsystem2";
 exports.labelBodyText = "ticketsystem2 Body";
 
 exports.btnExampleTitle = "CLICK ME";
+exports.entryTicketEndPoint = "bx_block_ticketsystem2/entry_tickets";
 // Customizable Area End
