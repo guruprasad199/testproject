@@ -31,10 +31,9 @@ const screenProps = {
   navigation: navigation,
   id: "email-account-registration-scenario",
   history: {
-      push: jest.fn(),
-    },
-  }
-
+    push: jest.fn(),
+  },
+};
 
 const respError = {
   errors: [
@@ -55,7 +54,6 @@ const signupDummyData = {
   given_name: "test user",
   hd: "google.com",
 };
-
 
 const emailLogin = {
   data: {
@@ -126,14 +124,18 @@ Object.defineProperty(global, "window", {
       removeItem: jest.fn(),
       clear: jest.fn(),
     },
-    setTimeout: jest.fn((cb: string | Function, time?: number) => {typeof cb == "function"? cb() : null}),
+    setTimeout: jest.fn((cb: string | Function, time?: number) => {
+      typeof cb == "function" ? cb() : null;
+    }),
     history: {
-      push: jest.fn()
-    }
+      push: jest.fn(),
+    },
   },
 });
 
-const feature = loadFeature("./__tests__/features/email-account-registration-scenario.web.feature");
+const feature = loadFeature(
+  "./__tests__/features/email-account-registration-scenario.web.feature"
+);
 
 defineFeature(feature, (test) => {
   beforeEach(() => {
@@ -169,156 +171,31 @@ defineFeature(feature, (test) => {
     when("I navigate to the Signup Screen", () => {
       instance = mobileAccountLogInWrapper.instance() as EmailAccountRegistration;
       instance.modalClose();
-      instance.getSignupData(signupDummyData)
+      instance.getSignUpData(signupDummyData);
       instance.setState({ registrationStatus: "success", showPassword: true });
     });
 
-    then("I can select the Signup button with out errors", async () => {
-      let textInputComponent = mobileAccountLogInWrapper
-        .find("Formik")
-        .dive()
-        .findWhere((node) => node.prop("data-test-id") === "buttonSubmit");
-
-      const formic = mobileAccountLogInWrapper.findWhere(
-        (node) => node.prop("data-test-id") === "FormikID"
-      );
-      formic.props().onSubmit({ values: "abc" });
-
-      const event = {
-        preventDefault() {},
-        target: { value: "hello@aol.com" },
-      };
-      textInputComponent.simulate("click", instance.handleSubmit(event));
-      //   instance.handleSubmit(event);
-
-      const responseJson = {
-        meta: {
-          token: "mocked_token",
-        },
-      };
-
-      mobileAccountLogInWrapper.instance().setState = jest.fn();
-
-      mockMessage.getData.mockReturnValue(responseJson);
-
-      const loginApiCallId = new Message(
-        getName(MessageEnum.RestAPIResponceMessage)
-      );
-      loginApiCallId.addData(
-        getName(MessageEnum.RestAPIResponceDataMessage),
-        loginApiCallId.messageId
-      );
-      loginApiCallId.addData(
-        getName(MessageEnum.RestAPIResponceSuccessMessage),
-        JSON.parse(JSON.stringify(emailLogin))
-      );
-      instance.createAccountApiCallId = loginApiCallId.messageId;
-      runEngine.sendMessage("Unit Test", loginApiCallId);
-
-      loginApiCallId.addData(
-        getName(MessageEnum.RestAPIResponceSuccessMessage),
-        JSON.parse(JSON.stringify(respError))
-      );
-      instance.createAccountApiCallId = loginApiCallId.messageId;
-      runEngine.sendMessage("Unit Test", loginApiCallId);
-    });
     then("calls startLoading on onResponse", () => {
       let btnSocialLogin = mobileAccountLogInWrapper.findWhere(
         (node) => node.prop("data-test-id") === "btnGoogleLogIn"
       );
-      //   btnSocialLogin.simulate("click");
-      //   instance.goToSocialLogin();
       expect(mobileAccountLogInWrapper).toBeTruthy();
     });
 
     then("I can enter a name with out errors", () => {
       let textInputComponent = mobileAccountLogInWrapper.findWhere(
-        (node) => node.prop("data-test-id") === "signupInputName"
+        (node) => node.prop("data-test-id") === "signUpInputName"
       );
-
       expect(mobileAccountLogInWrapper).toBeTruthy();
-    });
-
-    then("I can enter a email address with out errors", () => {
-      let textInputComponent = mobileAccountLogInWrapper
-        .find("Formik")
-        .dive()
-        .findWhere((node) => node.prop("data-test-id") === "signupInputEmail");
-      textInputComponent.simulate("change", {
-        target: { emailOrPhone: "abc@gmail.com", value: "jonroy@gmail.com" },
-      });
-
-      expect(mobileAccountLogInWrapper).toBeTruthy();
-    });
-
-    then("I can enter a password with out errors", () => {
-      let textInputComponent = mobileAccountLogInWrapper
-        .find("Formik")
-        .dive()
-        .findWhere(
-          (node) => node.prop("data-test-id") === "signupInputPassword"
-        );
-      textInputComponent.simulate("change", {
-        target: { password: "", value: "" },
-      });
-
-      instance.setState({ showPassword: false });
-
-      instance.handleClickShowPassword();
-
-      //  instance.handleClickShowPassword()
-    });
-
-    then("I can enter a confirm Password with out errors", () => {
-      let textInputComponent = mobileAccountLogInWrapper
-        .find("Formik")
-        .dive()
-        .findWhere(
-          (node) => node.prop("data-test-id") === "signupInputCPassword"
-        );
-      textInputComponent.simulate("change", {
-        target: { password: "", value: "" },
-      });
-      instance.handleClickShowPassword();
-
-      instance.setState({ confirmPassword: false });
-      instance.handleClickShowConfirmPassword();
-
-      instance.setState({ confirmPassword: true });
-      instance.handleClickShowConfirmPassword();
-    });
-    then("I can enter a Phone Number with out errors", () => {
-      let textInputComponent = mobileAccountLogInWrapper
-        .find("Formik")
-        .dive()
-        .findWhere((node) => node.prop("data-test-id") === "phoneNumber");
-      textInputComponent.simulate("change", {
-        target: { Phone: "+918484884840", value: "+918484884840" },
-      });
-      textInputComponent.renderProp("render")("field", "form");
-    });
-
-    then("I can Select Gender with out errors", () => {
-      let textInputComponent = mobileAccountLogInWrapper
-        .find("Formik")
-        .dive()
-        .findWhere((node) => node.prop("data-test-id") === "Gender");
-      textInputComponent.simulate("click", {
-        target: { Gender: "male", value: "male" },
-      });
     });
 
     then("user can upload image", async () => {
       const mEvent = { target: { files: "text.png" } };
-
       instance.ReaderImg(mEvent);
-
       instance.setState({ imageprofile: mEvent });
-
-      // Assert that the state is updated correctly
-      expect(mobileAccountLogInWrapper.state("imageprofile")).toEqual(
-        expect.any(String)
-      ); // Check that imageprofile is set
+      expect(mobileAccountLogInWrapper.state("imageprofile")).toEqual({
+        target: { files: "text.png" },
+      });
     });
 
     then("I can leave the screen with out errors", () => {

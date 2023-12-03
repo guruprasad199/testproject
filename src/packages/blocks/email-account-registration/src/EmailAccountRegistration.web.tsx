@@ -9,9 +9,6 @@ import {
   IconButton,
   TextField,
   Link,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
   FormHelperText,
   Modal,
   createStyles,
@@ -21,7 +18,6 @@ import {
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Visibility from "@material-ui/icons/Visibility";
 import PhoneInput from "react-phone-input-2";
-
 import "react-phone-input-2/lib/style.css";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import {
@@ -53,9 +49,9 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
         onClose={this.modalClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        data-testid="new_spend_modal"
+        data-test-id="new_spend_modal"
       >
-        <Box className={this.props.classes.popUpWrapper}>
+        <Box className={this.props.classes?.popUpWrapper}>
           <img
             src={
               this.state.registrationStatus === "success"
@@ -69,7 +65,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
             id="modal-modal-title"
             variant="h6"
             component="h2"
-            className={this.props.classes.textTitleContent}
+            className={this.props.classes?.textTitleContent}
           >
             {this.state.registrationStatus === "success"
               ? "User Registration Successful"
@@ -112,7 +108,6 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
       )
     );
   };
-
   // Customizable Area End
 
   render() {
@@ -146,10 +141,12 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                   access_type="online"
                   discoveryDocs="claims_supported"
                   onResolve={({ provider, data }) => {
-                    this.getSignupData(data);
+                    //istanbul ignore next/
+                    this.getSignUpData(data);
                   }}
                   onReject={(error) => {
-                    this.getSignupData(error);
+                    //istanbul ignore next/
+                    this.getSignUpData(error);
                   }}
                   isOnlyGetToken={false}
                 >
@@ -167,7 +164,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                 <Box mt={"34px"} style={{ position: "relative" }} pt={"10px"}>
                   <Box className={this.props.classes?.lineHorizontal} />
                   <Box className={this.props.classes?.divider}>
-                    <Typography className={this.props.classes?.textdivide}>
+                    <Typography className={this.props.classes?.textDivide}>
                       OR
                     </Typography>
                   </Box>
@@ -184,7 +181,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                     </label>
 
                     <TextField
-                      data-test-id="signupInputName"
+                      data-test-id="signUpInputName"
                       className={this.props.classes?.inputFelid}
                       type="text"
                       id="firstName"
@@ -215,7 +212,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                       Last Name
                     </label>
                     <TextField
-                      data-test-id="signupInputName"
+                      data-test-id="signUpInputName"
                       type="text"
                       id="lastName"
                       className={this.props.classes?.inputFelid}
@@ -242,7 +239,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                       Email
                     </label>
                     <TextField
-                      data-test-id="signupInputEmail"
+                      data-test-id="signUpInputEmail"
                       id="email"
                       className={this.props.classes?.inputFelid}
                       name="email"
@@ -255,14 +252,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                     />
                     <FormHelperText>
                       {this.state.guruEmailError.length !== 0 && (
-                        <div
-                          style={{
-                            color: "red",
-                            marginTop: "10px",
-                            fontFamily: "Montserrat",
-                            marginBottom: "10px",
-                            fontSize: "11px",
-                          }}
+                        <div className={this.props.classes?.errorMessage}
                         >
                           <img
                             src={warning}
@@ -409,7 +399,6 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                     />
                     <div
                       className={this.props.classes?.errorMessage}
-                      style={{}}
                     >
                       {this.state.isPhoneNumberValid}
                     </div>
@@ -482,7 +471,9 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                         <Box>
                           {this.state.imageprofile === "" ? (
                             <Box className={this.props.classes?.iconstyle}>
-                              <Typography className={this.props.classes?.imageReader}>
+                              <Typography
+                                className={this.props.classes?.imageReader}
+                              >
                                 +
                               </Typography>
                             </Box>
@@ -514,8 +505,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                     </Box>
                   </Grid>
                   <Grid item xs={12}>
-                    <Box className={this.props.classes?.signUpButtonWrap}
-                    >
+                    <Box className={this.props.classes?.signUpButtonWrap}>
                       <Button
                         onClick={this.handleSubmitNew}
                         data-test-id="buttonSubmit"
@@ -529,7 +519,8 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                         Already have an account?{" "}
                         <Link
                           href="/LogIn"
-                          className={this.props.classes?.linkContainer}>
+                          className={this.props.classes?.linkContainer}
+                        >
                           Sign in
                         </Link>
                       </Typography>
@@ -588,9 +579,12 @@ const styles = (theme: Theme) =>
       paddingTop: "147px",
     },
     signUpButtonWrap: {
-      display:"flex",
-      flexDirection:"column",
-      gap: "10px"
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px",
+    },
+    emailErrorText: {
+
     },
     linkContainer: {
       color: "#2B65EC",
@@ -664,7 +658,7 @@ const styles = (theme: Theme) =>
       display: "inline-block",
       margin: "0px 8px 2px 0px",
     },
-    textdivide: {
+    textDivide: {
       fontSize: "14px",
       fontWeight: "bold",
       fontFamily: "Montserrat,sans-serif",

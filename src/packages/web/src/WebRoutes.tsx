@@ -34,7 +34,7 @@ const SignIn = lazy(() =>
 import { AdventureActivityWithStyle } from '../../blocks/settings2/src/Settings2.web';
 import { CategoriessubcategoriesWithStyle } from '../../blocks/categoriessubcategories/src/Categoriessubcategories.web';
 import { LoginWebWithStyle } from '../../blocks/email-account-login/src/LogIn.web';
-import { SignUpWithStyle } from '../../blocks/email-account-registration/src/Signup.web';
+import { EmailAccountRegistrationWithStyle } from '../../blocks/email-account-registration/src/EmailAccountRegistration.web';
 import { TicketsystemWithStyle } from '../../blocks/ticketsystem2/src/Ticketsystem2.web';
 // /* Routes List End /
 
@@ -61,7 +61,7 @@ function WebRoutes(rootProps: any) {
         <Route
           path="/Signup"
           exact
-          render={props => <SignUpWithStyle {...props} />}
+          render={props => <EmailAccountRegistrationWithStyle {...props} />}
         />
         <Route
           path="/LogIn"

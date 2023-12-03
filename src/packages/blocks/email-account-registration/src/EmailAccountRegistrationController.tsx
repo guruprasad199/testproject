@@ -176,10 +176,8 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     this.arrayholder = [];
     this.passwordReg = new RegExp("\\w+");
     this.emailReg = new RegExp("\\w+");
-
     this.imgPasswordVisible = imgPasswordVisible;
     this.imgPasswordInVisible = imgPasswordInVisible;
-
     this.labelHeader = configJSON.labelHeader;
     this.labelFirstName = configJSON.labelFirstName;
     this.lastName = configJSON.lastName;
@@ -256,33 +254,10 @@ export default class EmailAccountRegistrationController extends BlockComponent<
         runEngine.unSubscribeFromMessages(this as IBlock, [message.id]);
       }
     }
-
-    if (getName(MessageEnum.CountryCodeMessage) === message.id) {
-      var selectedCode = message.getData(
-        getName(MessageEnum.CountyCodeDataMessage)
-      );
-
-      if (selectedCode !== undefined) {
-        this.setState({
-          countryCodeSelected:
-            selectedCode.indexOf("+") > 0
-              ? selectedCode.split("+")[1]
-              : selectedCode,
-        });
-      }
-    }
     // Customizable Area End
   }
 
   // Customizable Area Start
-  goToPrivacyPolicy() {
-    const msg: Message = new Message(
-      getName(MessageEnum.NavigationPrivacyPolicyMessage)
-    );
-    msg.addData(getName(MessageEnum.NavigationPropsMessage), this.props);
-    this.send(msg);
-  }
-
   goToTermsAndCondition() {
     const msg: Message = new Message(
       getName(MessageEnum.NavigationTermAndConditionMessage)
@@ -311,16 +286,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
         configJSON.errorTitle,
         configJSON.errorAllFieldsAreMandatory
       );
-      return false;
-    }
-
-    var phoneNumberError = this.validateCountryCodeAndPhoneNumber(
-      this.state.countryCodeSelected,
-      this.state.phone
-    );
-
-    if (phoneNumberError) {
-      this.showAlert(configJSON.errorTitle, phoneNumberError);
       return false;
     }
 
@@ -419,47 +384,8 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     runEngine.sendMessage(getValidationsMsg.id, getValidationsMsg);
   }
 
-  isNonNullAndEmpty(value: String) {
-    return (
-      value !== undefined &&
-      value !== null &&
-      value !== "null" &&
-      value.trim().length > 0
-    );
-  }
-
-  validateCountryCodeAndPhoneNumber(countryCode: string, phoneNumber: string) {
-    let error = null;
-
-    if (this.isNonNullAndEmpty(phoneNumber)) {
-      if (!this.isNonNullAndEmpty(String(countryCode))) {
-        error = configJSON.errorCountryCodeNotSelected;
-      }
-    } else if (this.isNonNullAndEmpty(countryCode)) {
-      if (!this.isNonNullAndEmpty(phoneNumber)) {
-        error = "Phone " + configJSON.errorBlankField;
-      }
-    }
-
-    return error;
-  }
-
   imgEnableRePasswordFieldProps = {
     source: imgPasswordVisible,
-  };
-
-  btnConfirmPasswordShowHideProps = {
-    onPress: () => {
-      this.setState({
-        enableReTypePasswordField: !this.state.enableReTypePasswordField,
-      });
-      this.txtInputConfirmPasswordProps.secureTextEntry = !this.state
-        .enableReTypePasswordField;
-      this.imgEnableRePasswordFieldProps.source = this
-        .txtInputConfirmPasswordProps.secureTextEntry
-        ? imgPasswordVisible
-        : imgPasswordInVisible;
-    },
   };
 
   imgEnablePasswordFieldProps = {
@@ -480,10 +406,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
 
   btnSignUpProps = {
     onPress: () => this.createAccount(),
-  };
-
-  btnLegalPrivacyPolicyProps = {
-    onPress: () => this.goToPrivacyPolicy(),
   };
 
   btnLegalTermsAndConditionProps = {
@@ -568,7 +490,7 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     this.setState({ isSignupModal: false, registrationStatus: "" });
   };
 
-  getSignupData = (data: any) => {
+  getSignUpData = (data: any) => {
     this.setState({ signupData: data });
     if (data?.access_token.length !== 0) {
       this.setState({ signUpOpen: true });
@@ -757,15 +679,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
 
   validateEmail = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    // this.setState({
-    //   formData: { ...this.state.formData, email: value },
-    //   formErrors: {
-    //     ...this.state.formErrors,
-    //     email: emailRegex.test(value)
-    //       ? ""
-    //       : "Please enter a valid email address",
-    //   },
-    // });
     this.setState({
       guruEmailError: emailRegex.test(this.state.guruEmail)
         ? ""
@@ -795,7 +708,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     });
     this.validatePassword(value);
     if (this.state.passwordMatchError) {
-      // Reset error when the user starts typing in the password field
       this.setState({ passwordMatchError: "" });
     }
   };
@@ -805,7 +717,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
   };
 
   validatePassword = (password: string) => {
-    // Password validation criteria
     const capitalRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
     const numberRegex = /[0-9]/;
@@ -832,8 +743,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
       }
     });
     if (this.state.passwordMatchError) {
-      // Reset error when the user starts typing in the confirm password field
-      // setPasswordMatchError(false);
       this.setState({ passwordMatchError: "" });
     }
   };

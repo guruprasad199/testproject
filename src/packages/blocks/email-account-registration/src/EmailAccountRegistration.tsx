@@ -104,7 +104,6 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                 <TouchableOpacity
                   testID={"btnConfirmPasswordShowHide"}
                   style={styles.passwordShowHide}
-                  {...this.btnConfirmPasswordShowHideProps}
                 >
                   <Image
                     testID={"imgEnableRePasswordField"}
@@ -151,7 +150,6 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                 <Text
                   testID={"btnLegalPrivacyPolicy"}
                   style={styles.btnLegalPrivacyPolicy}
-                  {...this.btnLegalPrivacyPolicyProps}
                 >
                   {this.labelLegalPrivacyPolicy}
                 </Text>
