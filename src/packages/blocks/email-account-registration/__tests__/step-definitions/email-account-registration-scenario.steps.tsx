@@ -9,13 +9,17 @@ import MessageEnum, {getName} from "../../../../framework/src/Messages/MessageEn
 import React from "react";
 
 import EmailAccountRegistration from "../../src/EmailAccountRegistration"
+import { beforeEach, expect, jest } from "@jest/globals";
 
 const navigation = require("react-navigation")
 
 const screenProps = {
     navigation: navigation,
-    id: "email-account-registration-scenario"
-  }
+    id: "email-account-registration-scenario",
+    history: {
+        push: jest.fn(),
+      },
+    }
 
 const feature = loadFeature('./__tests__/features/email-account-registration-scenario.feature');
 

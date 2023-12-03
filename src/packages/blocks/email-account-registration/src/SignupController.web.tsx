@@ -195,7 +195,7 @@ export default class SignupController extends BlockComponent<
         if (data?.access_token.length !== 0) {
           this.setState({ signUpOpen: true });
           window.setTimeout(() => {
-            this.props.history?.push("/");
+            this.props.history?.push("/Dashboard");
           }, 3000);
         }
       };

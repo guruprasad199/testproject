@@ -1,4 +1,4 @@
-Feature: Signup
+Feature: EmailAccountRegistration
     Scenario: User navigates to Email Signup
         Given I am a User attempting to Signup with a Email
         When I navigate to the Signup Screen

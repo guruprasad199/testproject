@@ -11,21 +11,30 @@ import MessageEnum, {
 } from "../../../../framework/src/Messages/MessageEnum";
 import React from "react";
 
-import Signup from "../../src/Signup.web";
+import EmailAccountRegistration from "../../src/EmailAccountRegistration.web";
 import { beforeEach, expect, jest } from "@jest/globals";
 import PhoneInput from "react-phone-input-2";
 
 const navigation = require("react-navigation");
 
+// const screenProps = {
+//   navigation: {
+//     addListener: jest.fn().mockImplementation((event, callback) => {}),
+//     navigate: jest.fn(),
+//     goBack: jest.fn(),
+//     dispatch: jest.fn(),
+//   },
+//   id: "Signup",
+// };
+
 const screenProps = {
-  navigation: {
-    addListener: jest.fn().mockImplementation((event, callback) => {}),
-    navigate: jest.fn(),
-    goBack: jest.fn(),
-    dispatch: jest.fn(),
-  },
-  id: "Signup",
-};
+  navigation: navigation,
+  id: "email-account-registration-scenario",
+  history: {
+      push: jest.fn(),
+    },
+  }
+
 
 const respError = {
   errors: [
@@ -124,7 +133,7 @@ Object.defineProperty(global, "window", {
   },
 });
 
-const feature = loadFeature("./__tests__/features/Signup-scenario.web.feature");
+const feature = loadFeature("./__tests__/features/email-account-registration-scenario.web.feature");
 
 defineFeature(feature, (test) => {
   beforeEach(() => {
@@ -144,21 +153,21 @@ defineFeature(feature, (test) => {
 
   test("User navigates to Email Signup", ({ given, when, then }) => {
     let mobileAccountLogInWrapper: ShallowWrapper;
-    let instance: Signup;
-    let newinstance: Signup;
+    let instance: EmailAccountRegistration;
+    let newinstance: EmailAccountRegistration;
 
     given("I am a User attempting to Signup with a Email", () => {
       mobileAccountLogInWrapper = shallow(
-        <Signup navigation={undefined} id={""} classes={undefined} />
+        <EmailAccountRegistration {...screenProps} />
       );
       expect(mobileAccountLogInWrapper).toBeTruthy();
 
-      instance = mobileAccountLogInWrapper.instance() as Signup;
-      newinstance = mobileAccountLogInWrapper.instance() as Signup;
+      instance = mobileAccountLogInWrapper.instance() as EmailAccountRegistration;
+      newinstance = mobileAccountLogInWrapper.instance() as EmailAccountRegistration;
     });
 
     when("I navigate to the Signup Screen", () => {
-      instance = mobileAccountLogInWrapper.instance() as Signup;
+      instance = mobileAccountLogInWrapper.instance() as EmailAccountRegistration;
       instance.modalClose();
       instance.getSignupData(signupDummyData)
       instance.setState({ registrationStatus: "success", showPassword: true });

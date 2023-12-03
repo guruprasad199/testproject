@@ -5,3 +5,6 @@ export const RightImg = require("../assets/skip.png");
 export const google = require("../assets/Google.png");
 export const successLogo = require("../assets/successImg.png");
 export const failLogo = require("../assets/crossImgs.png");
+export const redDot = require("../assets/redDot.png");
+export const checkMark = require("../assets/checkMark.png");
+export const warning = require("../assets/warning_amber.png");

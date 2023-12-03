@@ -67,6 +67,7 @@
         "tsConfig": "__tests__/tsconfig.base.json"
       }
     },
+    "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "<rootDir>/node_modules/jest-enzyme/lib/index.js"
     ],

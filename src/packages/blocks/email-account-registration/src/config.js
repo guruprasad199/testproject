@@ -38,6 +38,7 @@ exports.errorEmailNotValid = "Email not valid.";
 exports.urlGetValidations =
   "profile/validations";
 exports.validationApiContentType = "application/json";
+exports.clientId = "412576249528-k7g422igil5cb4i9v7f4hrkm87j7dmpp.apps.googleusercontent.com"
 
 exports.validationApiMethodType = "GET";
 exports.Endpointapi="/account_engine/accounts"
