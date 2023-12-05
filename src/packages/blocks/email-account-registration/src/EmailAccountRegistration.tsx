@@ -127,7 +127,6 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                 testID={"txtPhoneNumber"}
                 style={Platform.OS === "web" ? styles.inputWeb : styles.bgInput}
                 placeholder={"Phone"}
-                {...this.txtPhoneNumberProps}
               />
 
               <Text style={styles.leagalText}>{this.labelLegalText}</Text>

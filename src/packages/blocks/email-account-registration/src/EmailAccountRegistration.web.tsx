@@ -14,6 +14,7 @@ import {
   createStyles,
   Theme,
   withStyles,
+  InputAdornment,
 } from "@material-ui/core";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Visibility from "@material-ui/icons/Visibility";
@@ -29,6 +30,7 @@ import {
   redDot,
   checkMark,
   warning,
+  iconS,
 } from "./assets";
 // Customizable Area End
 
@@ -246,14 +248,13 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                       placeholder="abc@gmail.com"
                       variant="outlined"
                       fullWidth
-                      error={!!this.state.formErrors.email}
+                      error={!!this.state.guruEmailError}
                       onChange={this.handleEmail}
                       onBlur={this.validateEmail}
                     />
                     <FormHelperText>
                       {this.state.guruEmailError.length !== 0 && (
-                        <div className={this.props.classes?.errorMessage}
-                        >
+                        <div className={this.props.classes?.errorMessage}>
                           <img
                             src={warning}
                             alt="warning"
@@ -275,7 +276,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                       name="password"
                       variant="outlined"
                       placeholder="**********"
-                      type={this.state.confirmPassword ? "text" : "password"}
+                      type={this.state.showPassword ? "text" : "password"}
                       className={this.props.classes?.inputFelid}
                       value={this.state.newPaasword}
                       onChange={this.passwordHandleChange}
@@ -293,9 +294,9 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                         endAdornment: (
                           <IconButton
                             aria-label="toggle password visibility"
-                            onClick={this.handleClickShowConfirmPassword}
+                            onClick={this.handleClickShowPassword}
                           >
-                            {this.state.confirmPassword ? (
+                            {this.state.showPassword ? (
                               <Visibility />
                             ) : (
                               <VisibilityOff />
@@ -370,15 +371,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                       }}
                     />
                     <FormHelperText>
-                      <div
-                        style={{
-                          color: "red",
-                          marginTop: "10px",
-                          fontFamily: "Montserrat",
-                          marginBottom: "10px",
-                          fontSize: "11px",
-                        }}
-                      >
+                      <div className={this.props.classes?.errorMessage}>
                         {this.state.passwordMatchError}
                       </div>
                     </FormHelperText>
@@ -397,9 +390,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                       value={this.state.guruMobileNumber}
                       onChange={this.handlePhoneNumberChange}
                     />
-                    <div
-                      className={this.props.classes?.errorMessage}
-                    >
+                    <div className={this.props.classes?.errorMessage}>
                       {this.state.isPhoneNumberValid}
                     </div>
                   </Grid>
@@ -507,7 +498,7 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                   <Grid item xs={12}>
                     <Box className={this.props.classes?.signUpButtonWrap}>
                       <Button
-                        onClick={this.handleSubmitNew}
+                        onClick={this.signUpClick}
                         data-test-id="buttonSubmit"
                         type="submit"
                         className={this.props.classes?.signbtn}
@@ -515,6 +506,19 @@ export default class EmailAccountRegistration extends EmailAccountRegistrationCo
                       >
                         Sign up
                       </Button>
+                      {/* <div className={this.props.classes?.searchContainer}>
+                        <input
+                          type="text"
+                          className={this.props.classes?.searchInput}
+
+                          placeholder="Search..."
+                        >                        <img
+                        src={iconS}
+                        alt="Search"
+                        className={this.props.classes?.searchIcon}
+                      /></input>
+
+                      </div> */}
                       <Typography className={this.props.classes?.accountLink}>
                         Already have an account?{" "}
                         <Link
@@ -545,6 +549,9 @@ const styles = (theme: Theme) =>
       height: "100%",
       width: "100%",
     },
+    guruSearch: {
+      background: "red",
+    },
     divider: {
       position: "absolute",
       top: 0,
@@ -555,6 +562,19 @@ const styles = (theme: Theme) =>
     },
     lineHorizontal: {
       borderTop: "1px solid #e2e8f0",
+    },
+    searchContainer: {
+      position: "relative",
+    },
+    searchInput: {
+      paddingRight: "30px",
+    },
+    searchIcon: {
+      position: "absolute",
+      top: "50%",
+      right: "10px" /* Adjust the right distance to position the icon */,
+      transform: "translateY(-50%)",
+      cursor: "pointer",
     },
     formBackground: {
       width: "100%",
@@ -583,9 +603,7 @@ const styles = (theme: Theme) =>
       flexDirection: "column",
       gap: "10px",
     },
-    emailErrorText: {
-
-    },
+    emailErrorText: {},
     linkContainer: {
       color: "#2B65EC",
       fontFamily: "Montserrat",

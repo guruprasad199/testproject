@@ -8,3 +8,4 @@ export const failLogo = require("../assets/crossImgs.png");
 export const redDot = require("../assets/redDot.png");
 export const checkMark = require("../assets/checkMark.png");
 export const warning = require("../assets/warning_amber.png");
+export const iconS = require("../assets/Icon.png")

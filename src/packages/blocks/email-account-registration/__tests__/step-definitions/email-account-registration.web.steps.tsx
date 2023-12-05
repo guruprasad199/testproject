@@ -171,6 +171,8 @@ defineFeature(feature, (test) => {
     when("I navigate to the Signup Screen", () => {
       instance = mobileAccountLogInWrapper.instance() as EmailAccountRegistration;
       instance.modalClose();
+      instance.signUpClick()
+      instance.callSignUpApi()
       instance.getSignUpData(signupDummyData);
       instance.setState({ registrationStatus: "success", showPassword: true });
     });

@@ -429,25 +429,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     ? this.txtInputEmailWebPrpos
     : this.txtInputEmailMobilePrpos;
 
-  txtPhoneNumberWebProps = {
-    onChangeText: (text: string) => {
-      this.setState({ phone: text });
-
-      //@ts-ignore
-      this.txtPhoneNumberProps.value = text;
-    },
-  };
-
-  txtPhoneNumberMobileProps = {
-    ...this.txtPhoneNumberWebProps,
-    autoCompleteType: "tel",
-    keyboardType: "phone-pad",
-  };
-
-  txtPhoneNumberProps = this.isPlatformWeb()
-    ? this.txtPhoneNumberWebProps
-    : this.txtPhoneNumberMobileProps;
-
   txtInputLastNamePrpos = {
     onChangeText: (text: string) => {
       this.setState({ lastName: text });
@@ -500,28 +481,26 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     }
   };
 
-  handleSubmit = (value: any) => {
-    // Customizable Area Start
+  callSignUpApi = () => {
     const Token = localStorage.getItem("LoginSuccessToken");
     const header = {
       token: Token,
-      // "Content-Type": configJSON.contentTypeApiAddDetail
     };
-    let formdata = new FormData();
+    let formData = new FormData();
 
-    formdata.append(
+    formData.append(
       "data[attributes][password_confirmation]",
       this.state.guruConfirm
     );
-    formdata.append("data[attributes][password]", this.state.newPaasword);
-    formdata.append("data[attributes][email]", this.state.guruEmail);
-    formdata.append("data[attributes][first_name]", this.state.guruFirstName);
-    formdata.append("data[attributes][last_name]", this.state.guruLastName);
-    formdata.append(
+    formData.append("data[attributes][password]", this.state.newPaasword);
+    formData.append("data[attributes][email]", this.state.guruEmail);
+    formData.append("data[attributes][first_name]", this.state.guruFirstName);
+    formData.append("data[attributes][last_name]", this.state.guruLastName);
+    formData.append(
       "data[attributes][full_phone_number]",
       this.state.guruMobileNumber
     );
-    formdata.append("data[type]", "email_account");
+    formData.append("data[type]", "email_account");
 
     const requestMessage = new Message(
       getName(MessageEnum.RestAPIRequestMessage)
@@ -540,7 +519,7 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     );
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestBodyMessage),
-      formdata
+      formData
     );
     requestMessage.addData(
       getName(MessageEnum.RestAPIRequestMethodMessage),
@@ -548,8 +527,6 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     );
 
     runEngine.sendMessage(requestMessage.id, requestMessage);
-
-    // Customizable Area End
     return true;
   };
 
@@ -572,24 +549,12 @@ export default class EmailAccountRegistrationController extends BlockComponent<
     this.setState({ imageupload: e.target.files[0] });
   };
 
-  handleChange = (e: any) => {
-    const { name, value } = e.target;
-    if (name === "email") {
-      // this.validateEmail(value);
-    } else {
-      this.setState({
-        formData: { ...this.state.formData, [name]: value },
-        formErrors: { ...this.state.formErrors, [name]: "" },
-      });
-    }
-  };
-
   handleEmail = (e: any) => {
     this.setState({ guruEmail: e.target.value });
     this.validateEmail();
   };
 
-  handleSubmitNew = (e: any) => {
+  signUpClick = () => {
     const {
       guruEmail,
       guruConfirm,
@@ -625,45 +590,7 @@ export default class EmailAccountRegistrationController extends BlockComponent<
       lowerCaseLetter === false &&
       specialCharacter === false
     ) {
-      this.handleSubmit(e);
-    }
-  };
-
-  handleBlur = (name: any, title: string) => {
-    if (name === "email") {
-      // this.validateEmail(this.state.formData.email);
-    } else {
-      if (!this.state.formData[name]?.trim()) {
-        this.setState({
-          formErrors: {
-            ...this.state.formErrors,
-            [name]: title,
-          },
-        });
-      }
-    }
-  };
-
-  handleBlurLastName = (name: any, title: string) => {
-    if (!this.state.formData[name]?.trim()) {
-      this.setState({
-        formErrors: {
-          ...this.state.formErrors,
-          [name]: title,
-        },
-      });
-    }
-  };
-
-  confirmHandleBlur = () => {
-    if (this.state.newPaasword !== this.state.formData.confirmPassword) {
-      // Set error if passwords don't match
-      this.setState({
-        formErrors: {
-          ...this.state.formErrors,
-          confirmPassword: "jjddkkdkdk",
-        },
-      });
+      this.callSignUpApi();
     }
   };
 
@@ -719,7 +646,7 @@ export default class EmailAccountRegistrationController extends BlockComponent<
   validatePassword = (password: string) => {
     const capitalRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
-    const numberRegex = /[0-9]/;
+    const numberRegex = /\d/;
     const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
 
     let errors = {
